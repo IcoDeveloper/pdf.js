@@ -330,7 +330,7 @@ if (
   };
   defaultOptions.disableTelemetry = {
     /** @type {boolean} */
-    value: false,
+    value: true,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   };
   defaultOptions.sandboxBundleSrc = {

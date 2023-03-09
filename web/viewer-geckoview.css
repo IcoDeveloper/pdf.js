@@ -82,7 +82,7 @@ body {
   position: relative;
 }
 
-#mainContainer {
+.pdfjs-mainContainer {
   position: absolute;
   top: 0;
   right: 0;
@@ -91,7 +91,7 @@ body {
   min-width: 350px;
 }
 
-#viewerContainer {
+.pdfjs-viewerContainer {
   overflow: auto;
   position: absolute;
   top: 0;
@@ -100,7 +100,7 @@ body {
   left: 0;
   outline: none;
 }
-#viewerContainer {
+.pdfjs-viewerContainer {
   transition-duration: var(--sidebar-transition-duration);
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
@@ -214,10 +214,10 @@ dialog :link {
   color: rgba(255, 255, 255, 1);
 }
 
-#passwordDialog {
+.pdfjs-passwordDialog {
   text-align: center;
 }
-#passwordDialog .toolbarField {
+.pdfjs-passwordDialog .toolbarField {
   width: 200px;
 }
 

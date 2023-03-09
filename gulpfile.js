@@ -69,8 +69,8 @@ const COMMON_WEB_FILES = [
 ];
 const MOZCENTRAL_DIFF_FILE = "mozcentral.diff";
 
-const REPO = "git@github.com:mozilla/pdf.js.git";
-const DIST_REPO_URL = "https://github.com/mozilla/pdfjs-dist";
+const REPO = "git@github.com:IcoDeveloper/pdf.js.git";
+const DIST_REPO_URL = "https://github.com/IcoDeveloper/pdfjs-dist";
 
 const builder = require("./external/builder/builder.js");
 
@@ -1033,6 +1033,7 @@ function buildComponents(defines, dir) {
   ]);
 }
 
+// task: components
 gulp.task(
   "components",
   gulp.series(createBuildNumber, function createComponents() {
@@ -1044,6 +1045,7 @@ gulp.task(
   })
 );
 
+// task: components-legacy
 gulp.task(
   "components-legacy",
   gulp.series(createBuildNumber, function createComponentsLegacy() {
@@ -1058,7 +1060,7 @@ gulp.task(
     return buildComponents(defines, COMPONENTS_LEGACY_DIR);
   })
 );
-
+// task: image_decoders
 gulp.task(
   "image_decoders",
   gulp.series(createBuildNumber, function createImageDecoders() {
@@ -1074,7 +1076,7 @@ gulp.task(
     );
   })
 );
-
+// task: image_decoders-legacy
 gulp.task(
   "image_decoders-legacy",
   gulp.series(createBuildNumber, function createImageDecodersLegacy() {
@@ -1199,7 +1201,7 @@ async function parseMinified(dir) {
     dir + "/image_decoders/pdf.image_decoders.js"
   );
 }
-
+// task: minified
 gulp.task(
   "minified",
   gulp.series(
@@ -1225,7 +1227,7 @@ gulp.task(
     }
   )
 );
-
+// task: minified-legacy
 gulp.task(
   "minified-legacy",
   gulp.series(
@@ -1291,7 +1293,7 @@ function preprocessDefaultPreferences(content) {
     "\n"
   );
 }
-
+// task: mozcentral
 gulp.task(
   "mozcentral",
   gulp.series(
@@ -1388,7 +1390,7 @@ gulp.task(
     }
   )
 );
-
+// task: chromium
 gulp.task(
   "chromium",
   gulp.series(
@@ -1613,7 +1615,7 @@ function buildLib(defines, dir) {
 
   return buildLibHelper(bundleDefines, inputStream, dir);
 }
-
+// task: lib
 gulp.task(
   "lib",
   gulp.series(
@@ -1635,7 +1637,7 @@ gulp.task(
     }
   )
 );
-
+// task: lib-legacy
 gulp.task(
   "lib-legacy",
   gulp.series(
@@ -1675,7 +1677,7 @@ function compressPublish(targetName, dir) {
       console.log("Built distribution file: " + targetName);
     });
 }
-
+// task: publish
 gulp.task(
   "publish",
   gulp.series("generic", "generic-legacy", function createPublish(done) {
@@ -1718,7 +1720,7 @@ gulp.task("dev-fitCurve", function createDevFitCurve() {
 
   return createFitCurveBundle(defines).pipe(gulp.dest(fitCurveDir));
 });
-
+// task: test
 gulp.task(
   "test",
   gulp.series(
@@ -1736,7 +1738,7 @@ gulp.task(
     }
   )
 );
-
+// task: bottest
 gulp.task(
   "bottest",
   gulp.series(
@@ -1755,7 +1757,7 @@ gulp.task(
     }
   )
 );
-
+// task: xfatest
 gulp.task(
   "xfatest",
   gulp.series(
@@ -1773,7 +1775,7 @@ gulp.task(
     }
   )
 );
-
+// task: botxfatest
 gulp.task(
   "botxfatest",
   gulp.series(
@@ -1792,14 +1794,14 @@ gulp.task(
     }
   )
 );
-
+// task: browsertest
 gulp.task(
   "browsertest",
   gulp.series(setTestEnv, "generic", "components", function runBrowserTest() {
     return createTestSource("browser");
   })
 );
-
+// task: botbrowsertest
 gulp.task(
   "botbrowsertest",
   gulp.series(
@@ -1814,28 +1816,28 @@ gulp.task(
     }
   )
 );
-
+// task: unittest
 gulp.task(
   "unittest",
   gulp.series(setTestEnv, "generic", "dev-fitCurve", function runUnitTest() {
     return createTestSource("unit");
   })
 );
-
+// task: integrationtest
 gulp.task(
   "integrationtest",
   gulp.series(setTestEnv, "generic", function runIntegrationTest() {
     return createTestSource("integration");
   })
 );
-
+// task: fonttest
 gulp.task(
   "fonttest",
   gulp.series(setTestEnv, function runFontTest() {
     return createTestSource("font");
   })
 );
-
+// task: makeref
 gulp.task(
   "makeref",
   gulp.series(setTestEnv, "generic", "components", function runMakeref(done) {
@@ -1843,6 +1845,7 @@ gulp.task(
   })
 );
 
+// task: botmakeref
 gulp.task(
   "botmakeref",
   gulp.series(
@@ -1855,6 +1858,7 @@ gulp.task(
   )
 );
 
+// task: typestest
 gulp.task(
   "typestest",
   gulp.series(
@@ -1925,7 +1929,7 @@ function createBaseline(done) {
     );
   });
 }
-
+// task: unittestcli
 gulp.task(
   "unittestcli",
   gulp.series(setTestEnv, "lib-legacy", function runUnitTestCli(done) {
@@ -1987,7 +1991,7 @@ gulp.task("lint", function (done) {
     });
   });
 });
-
+// task: lint-chromium
 gulp.task(
   "lint-chromium",
   gulp.series(
@@ -2017,6 +2021,7 @@ gulp.task(
   )
 );
 
+// task: dev-sandbox
 gulp.task(
   "dev-sandbox",
   gulp.series(
@@ -2042,6 +2047,7 @@ gulp.task(
   )
 );
 
+// task: server
 gulp.task(
   "server",
   gulp.parallel(
@@ -2076,6 +2082,7 @@ gulp.task(
   )
 );
 
+// task: clean
 gulp.task("clean", async function (done) {
   console.log();
   console.log("### Cleaning up project builds");
@@ -2084,6 +2091,7 @@ gulp.task("clean", async function (done) {
   done();
 });
 
+// task: importl10n
 gulp.task("importl10n", function (done) {
   const locales = require("./external/importL10n/locales.js");
 
@@ -2166,6 +2174,7 @@ function ghPagesGit(done) {
   done();
 }
 
+// task: web
 gulp.task(
   "web",
   gulp.series(
@@ -2182,8 +2191,9 @@ function packageJson() {
   const VERSION = getVersionJSON().version;
 
   const DIST_NAME = "pdfjs-dist";
-  const DIST_DESCRIPTION = "Generic build of Mozilla's PDF.js library.";
-  const DIST_KEYWORDS = ["Mozilla", "pdf", "pdf.js"];
+  const DIST_DESCRIPTION =
+    "Generic build of Mozilla's PDF.js library for HybridForms.";
+  const DIST_KEYWORDS = ["Mozilla", "pdf", "pdf.js", "HybridForms"];
   const DIST_HOMEPAGE = "http://mozilla.github.io/pdf.js/";
   const DIST_BUGS_URL = "https://github.com/mozilla/pdf.js/issues";
   const DIST_LICENSE = "Apache-2.0";
@@ -2226,6 +2236,7 @@ function packageJson() {
   );
 }
 
+// task: dist-pre
 gulp.task(
   "dist-pre",
   gulp.series(
@@ -2336,11 +2347,14 @@ gulp.task(
   )
 );
 
+// task: dist-install
 gulp.task(
   "dist-install",
   gulp.series("dist-pre", function createDistInstall(done) {
     let distPath = DIST_DIR;
     const opts = {};
+    console.log('************* process.env.PDFJS_INSTALL_PATH *****************', process.env.PDFJS_INSTALL_PATH);
+    console.log('************* process.env.PDFJS_INSTALL_PATH *****************', distPath);
     const installPath = process.env.PDFJS_INSTALL_PATH;
     if (installPath) {
       opts.cwd = installPath;
@@ -2351,6 +2365,7 @@ gulp.task(
   })
 );
 
+// task: dist
 gulp.task(
   "dist",
   gulp.series("dist-pre", function createDist(done) {
@@ -2363,7 +2378,9 @@ gulp.task(
     // Attempt to work-around the broken link, see https://github.com/mozilla/pdf.js/issues/10391
     if (typeof reason === "string") {
       const reasonParts =
-        /^(See )(mozilla\/pdf\.js)@tags\/(v\d+\.\d+\.\d+)\s*$/.exec(reason);
+        /^(See )(IcoDeveloper\/pdf\.js)@tags\/(v\d+\.\d+\.\d+)\s*$/.exec(
+          reason
+        );
 
       if (reasonParts) {
         reason =
@@ -2392,6 +2409,7 @@ gulp.task(
   })
 );
 
+// task: mozcentralbaseline
 gulp.task(
   "mozcentralbaseline",
   gulp.series(createBaseline, function createMozcentralBaseline(done) {
@@ -2427,6 +2445,7 @@ gulp.task(
   })
 );
 
+// task: mozcentraldiff
 gulp.task(
   "mozcentraldiff",
   gulp.series(
@@ -2484,6 +2503,7 @@ gulp.task("externaltest", function (done) {
   done();
 });
 
+// task: ci-test
 gulp.task(
   "ci-test",
   gulp.series(gulp.parallel("lint", "externaltest", "unittestcli"), "typestest")

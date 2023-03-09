@@ -49,7 +49,7 @@ a {
 }
 
 #loading,
-#viewer {
+.pdfjs-viewer {
   display: none;
 }
 

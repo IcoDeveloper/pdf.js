@@ -227,7 +227,7 @@ body {
   display: none !important;
 }
 
-#viewerContainer.pdfPresentationMode:fullscreen {
+.pdfjs-viewerContainer.pdfPresentationMode:fullscreen {
   top: 0;
   background-color: rgba(0, 0, 0, 1);
   width: 100%;
@@ -256,7 +256,7 @@ body {
   position: relative;
 }
 
-#sidebarContainer {
+.pdfjs-sidebarContainer {
   position: absolute;
   top: 32px;
   bottom: 0;
@@ -272,15 +272,15 @@ body {
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
 
-#outerContainer.sidebarMoving #sidebarContainer,
-#outerContainer.sidebarOpen #sidebarContainer {
+#outerContainer.sidebarMoving .pdfjs-sidebarContainer,
+#outerContainer.sidebarOpen .pdfjs-sidebarContainer {
   visibility: visible;
 }
-#outerContainer.sidebarOpen #sidebarContainer {
+#outerContainer.sidebarOpen .pdfjs-sidebarContainer {
   inset-inline-start: 0;
 }
 
-#mainContainer {
+.pdfjs-mainContainer {
   position: absolute;
   top: 0;
   right: 0;
@@ -289,7 +289,7 @@ body {
   min-width: 350px;
 }
 
-#sidebarContent {
+.pdfjs-sidebarContent {
   top: 32px;
   bottom: 0;
   inset-inline-start: 0;
@@ -299,7 +299,7 @@ body {
   box-shadow: inset calc(-1px * var(--dir-factor)) 0 0 rgba(0, 0, 0, 0.25);
 }
 
-#viewerContainer {
+.pdfjs-viewerContainer {
   overflow: auto;
   position: absolute;
   top: 32px;
@@ -308,12 +308,12 @@ body {
   left: 0;
   outline: none;
 }
-#viewerContainer:not(.pdfPresentationMode) {
+.pdfjs-viewerContainer:not(.pdfPresentationMode) {
   transition-duration: var(--sidebar-transition-duration);
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
 
-#outerContainer.sidebarOpen #viewerContainer:not(.pdfPresentationMode) {
+#outerContainer.sidebarOpen .pdfjs-viewerContainer:not(.pdfPresentationMode) {
   inset-inline-start: var(--sidebar-width);
   transition-property: inset-inline-start;
 }
@@ -340,9 +340,9 @@ body {
 .findbar input,
 .findbar button,
 .findbar select,
-#sidebarContainer input,
-#sidebarContainer button,
-#sidebarContainer select {
+.pdfjs-sidebarContainer input,
+.pdfjs-sidebarContainer button,
+.pdfjs-sidebarContainer select {
   outline: none;
   font: message-box;
 }
@@ -351,7 +351,7 @@ body {
   width: 100%;
 }
 
-#toolbarSidebar {
+.pdfjs-toolbarSidebar {
   width: 100%;
   height: 32px;
   background-color: var(--sidebar-toolbar-bg-color);
@@ -359,7 +359,7 @@ body {
   border-bottom: var(--toolbarSidebar-border-bottom);
 }
 
-#sidebarResizer {
+.pdfjs-sidebarResizer {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -380,11 +380,11 @@ body {
   border-bottom: var(--toolbar-border-bottom);
 }
 
-#toolbarViewer {
+.pdfjs-toolbarViewer {
   height: 32px;
 }
 
-#loadingBar {
+.pdfjs-loadingBar {
   /* Define these variables here, and not in :root, to avoid reflowing the
      entire viewer when updating progress (see issue 15958). */
   --progressBar-percent: 0%;
@@ -400,11 +400,11 @@ body {
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
 
-#outerContainer.sidebarOpen #loadingBar {
+#outerContainer.sidebarOpen .pdfjs-loadingBar {
   inset-inline-start: var(--sidebar-width);
 }
 
-#loadingBar .progress {
+.pdfjs-loadingBar .progress {
   position: absolute;
   top: 0;
   left: 0;
@@ -426,13 +426,13 @@ body {
   }
 }
 
-#loadingBar.indeterminate .progress {
+.pdfjs-loadingBar.indeterminate .progress {
   transform: none;
   background-color: var(--progressBar-bg-color);
   transition: none;
 }
 
-#loadingBar.indeterminate .progress .glimmer {
+.pdfjs-loadingBar.indeterminate .progress .glimmer {
   position: absolute;
   top: 0;
   left: 0;
@@ -450,9 +450,9 @@ body {
   animation: progressIndeterminate 1s linear infinite;
 }
 
-#outerContainer.sidebarResizing #sidebarContainer,
-#outerContainer.sidebarResizing #viewerContainer,
-#outerContainer.sidebarResizing #loadingBar {
+#outerContainer.sidebarResizing .pdfjs-sidebarContainer,
+#outerContainer.sidebarResizing .pdfjs-viewerContainer,
+#outerContainer.sidebarResizing .pdfjs-loadingBar {
   /* Improve responsiveness and avoid visual glitches when the sidebar is resized. */
   transition-duration: 0s;
 }
@@ -481,14 +481,14 @@ body {
 .findbar > div {
   height: 32px;
 }
-.findbar > div#findbarInputContainer {
+.findbar > div.pdfjs-findbarInputContainer {
   margin-inline-end: 4px;
 }
 .findbar.wrapContainers > div,
-.findbar.wrapContainers > div#findbarMessageContainer > * {
+.findbar.wrapContainers > div.pdfjs-findbarMessageContainer > * {
   clear: both;
 }
-.findbar.wrapContainers > div#findbarMessageContainer {
+.findbar.wrapContainers > div.pdfjs-findbarMessageContainer {
   height: auto;
 }
 
@@ -511,23 +511,23 @@ body {
   color: var(--toggled-btn-color);
 }
 
-#findInput {
+.pdfjs-findInput {
   width: 200px;
 }
 /*#if !MOZCENTRAL*/
-#findInput::-webkit-input-placeholder {
+.pdfjs-findInput::-webkit-input-placeholder {
   color: rgba(191, 191, 191, 1);
 }
 /*#endif*/
-#findInput::placeholder {
+.pdfjs-findInput::placeholder {
   font-style: normal;
 }
-#findInput[data-status="pending"] {
+.pdfjs-findInput[data-status="pending"] {
   background-image: var(--loading-icon);
   background-repeat: no-repeat;
   background-position: calc(50% + 48% * var(--dir-factor));
 }
-#findInput[data-status="notFound"] {
+.pdfjs-findInput[data-status="notFound"] {
   background-color: rgba(255, 102, 102, 1);
 }
 
@@ -588,7 +588,7 @@ body {
   background-color: white;
 }
 
-#secondaryToolbarButtonContainer {
+.pdfjs-secondaryToolbarButtonContainer {
   max-width: 220px;
   min-height: 26px;
   max-height: calc(var(--viewer-container-height) - 40px);
@@ -596,12 +596,12 @@ body {
   margin-bottom: -4px;
 }
 
-#editorInkParamsToolbar {
+.pdfjs-editorInkParamsToolbar {
   inset-inline-end: 40px;
   background-color: var(--toolbar-bg-color);
 }
 
-#editorFreeTextParamsToolbar {
+.pdfjs-editorFreeTextParamsToolbar {
   inset-inline-end: 68px;
   background-color: var(--toolbar-bg-color);
 }
@@ -650,7 +650,7 @@ body {
   margin-inline-end: -9px;
 }
 
-#findResultsCount {
+.pdfjs-findResultsCount {
   background-color: rgba(217, 217, 217, 1);
   color: rgba(82, 82, 82, 1);
   text-align: center;
@@ -658,47 +658,47 @@ body {
   margin: 5px;
 }
 
-#findMsg {
+.pdfjs-findMsg {
   color: rgba(251, 0, 0, 1);
 }
 
-#findResultsCount:empty,
-#findMsg:empty {
+.pdfjs-findResultsCount:empty,
+.pdfjs-findMsg:empty {
   display: none;
 }
 
-#toolbarViewerMiddle {
+.pdfjs-toolbarViewerMiddle {
   position: absolute;
   left: 50%;
   transform: translateX(-50%);
 }
 
-#toolbarViewerLeft,
-#toolbarSidebarLeft {
+.pdfjs-toolbarViewerLeft,
+.pdfjs-toolbarSidebarLeft {
   float: var(--inline-start);
 }
-#toolbarViewerRight,
-#toolbarSidebarRight {
+.pdfjs-toolbarViewerRight,
+.pdfjs-toolbarSidebarRight {
   float: var(--inline-end);
 }
 
-#toolbarViewerLeft > *,
-#toolbarViewerMiddle > *,
-#toolbarViewerRight > *,
-#toolbarSidebarLeft *,
-#toolbarSidebarRight *,
+.pdfjs-toolbarViewerLeft > *,
+.pdfjs-toolbarViewerMiddle > *,
+.pdfjs-toolbarViewerRight > *,
+.pdfjs-toolbarSidebarLeft *,
+.pdfjs-toolbarSidebarRight *,
 .findbar * {
   position: relative;
   float: var(--inline-start);
 }
 
-#toolbarViewerLeft {
+.pdfjs-toolbarViewerLeft {
   padding-inline-start: 1px;
 }
-#toolbarViewerRight {
+.pdfjs-toolbarViewerRight {
   padding-inline-end: 1px;
 }
-#toolbarSidebarRight {
+.pdfjs-toolbarSidebarRight {
   padding-inline-end: 2px;
 }
 
@@ -752,7 +752,7 @@ body {
   position: relative;
   margin: 0;
 }
-#toolbarSidebar .splitToolbarButton > .toolbarButton {
+.pdfjs-toolbarSidebar .splitToolbarButton > .toolbarButton {
   margin-inline-end: 2px;
 }
 
@@ -823,6 +823,7 @@ body {
   top: 6px;
   inset-inline-end: 6px;
   pointer-events: none;
+  -webkit-mask-image: var(--toolbarButton-menuArrow-icon);
   mask-image: var(--toolbarButton-menuArrow-icon);
 }
 
@@ -895,66 +896,80 @@ body {
   inset-inline-start: 12px;
 }
 
-#sidebarToggle::before {
+.pdfjs-sidebarToggle::before {
+  -webkit-mask-image: var(--toolbarButton-sidebarToggle-icon);
   mask-image: var(--toolbarButton-sidebarToggle-icon);
   transform: scaleX(var(--dir-factor));
 }
 
-#secondaryToolbarToggle::before {
+.pdfjs-secondaryToolbarToggle::before {
+  -webkit-mask-image: var(--toolbarButton-secondaryToolbarToggle-icon);
   mask-image: var(--toolbarButton-secondaryToolbarToggle-icon);
   transform: scaleX(var(--dir-factor));
 }
 
-#findPrevious::before {
+.pdfjs-findPrevious::before {
+  -webkit-mask-image: var(--findbarButton-previous-icon);
   mask-image: var(--findbarButton-previous-icon);
 }
 
-#findNext::before {
+.pdfjs-findNext::before {
+  -webkit-mask-image: var(--findbarButton-next-icon);
   mask-image: var(--findbarButton-next-icon);
 }
 
-#previous::before {
+.pdfjs-previous::before {
+  -webkit-mask-image: var(--toolbarButton-pageUp-icon);
   mask-image: var(--toolbarButton-pageUp-icon);
 }
 
-#next::before {
+.pdfjs-next::before {
+  -webkit-mask-image: var(--toolbarButton-pageDown-icon);
   mask-image: var(--toolbarButton-pageDown-icon);
 }
 
-#zoomOut::before {
+.pdfjs-zoomOut::before {
+  -webkit-mask-image: var(--toolbarButton-zoomOut-icon);
   mask-image: var(--toolbarButton-zoomOut-icon);
 }
 
-#zoomIn::before {
+.pdfjs-zoomIn::before {
+  -webkit-mask-image: var(--toolbarButton-zoomIn-icon);
   mask-image: var(--toolbarButton-zoomIn-icon);
 }
 
-#presentationMode::before {
+.pdfjs-presentationMode::before {
+  -webkit-mask-image: var(--toolbarButton-presentationMode-icon);
   mask-image: var(--toolbarButton-presentationMode-icon);
 }
 
-#editorFreeText::before {
+.pdfjs-editorFreeText::before {
+  -webkit-mask-image: var(--toolbarButton-editorFreeText-icon);
   mask-image: var(--toolbarButton-editorFreeText-icon);
 }
 
-#editorInk::before {
+.pdfjs-editorInk::before {
+  -webkit-mask-image: var(--toolbarButton-editorInk-icon);
   mask-image: var(--toolbarButton-editorInk-icon);
 }
 
-#print::before,
-#secondaryPrint::before {
+.pdfjs-print::before,
+.pdfjs-secondaryPrint::before {
+  -webkit-mask-image: var(--toolbarButton-print-icon);
   mask-image: var(--toolbarButton-print-icon);
 }
 
 /*#if GENERIC*/
-#openFile::before,
-#secondaryOpenFile::before {
+.pdfjs-openFile::before,
+.pdfjs-secondaryOpenFile::before {
+  -webkit-mask-image: var(--toolbarButton-openFile-icon);
   mask-image: var(--toolbarButton-openFile-icon);
 }
 /*#endif*/
 
-#download::before,
-#secondaryDownload::before {
+.pdfjs-download::before,
+.pdfjs-secondaryDownload::before {
+  -webkit-mask-image: var(--toolbarButton-download-icon);
   mask-image: var(--toolbarButton-download-icon);
 }
 
@@ -968,33 +983,40 @@ a.secondaryToolbarButton[href="#"] {
   pointer-events: none;
 }
 
-#viewBookmark::before {
+.pdfjs-viewBookmark::before {
+  -webkit-mask-image: var(--toolbarButton-bookmark-icon);
   mask-image: var(--toolbarButton-bookmark-icon);
 }
 
-#viewThumbnail::before {
+.pdfjs-viewThumbnail::before {
+  -webkit-mask-image: var(--toolbarButton-viewThumbnail-icon);
   mask-image: var(--toolbarButton-viewThumbnail-icon);
 }
 
-#viewOutline::before {
+.pdfjs-viewOutline::before {
+  -webkit-mask-image: var(--toolbarButton-viewOutline-icon);
   mask-image: var(--toolbarButton-viewOutline-icon);
   transform: scaleX(var(--dir-factor));
 }
 
-#viewAttachments::before {
+.pdfjs-viewAttachments::before {
+  -webkit-mask-image: var(--toolbarButton-viewAttachments-icon);
   mask-image: var(--toolbarButton-viewAttachments-icon);
 }
 
-#viewLayers::before {
+.pdfjs-viewLayers::before {
+  -webkit-mask-image: var(--toolbarButton-viewLayers-icon);
   mask-image: var(--toolbarButton-viewLayers-icon);
 }
 
-#currentOutlineItem::before {
+.pdfjs-currentOutlineItem::before {
+  -webkit-mask-image: var(--toolbarButton-currentOutlineItem-icon);
   mask-image: var(--toolbarButton-currentOutlineItem-icon);
   transform: scaleX(var(--dir-factor));
 }
 
-#viewFind::before {
+.pdfjs-viewFind::before {
+  -webkit-mask-image: var(--toolbarButton-search-icon);
   mask-image: var(--toolbarButton-search-icon);
 }
 
@@ -1030,59 +1052,73 @@ a.secondaryToolbarButton[href="#"] {
   padding-inline-end: 4px;
 }
 
-#firstPage::before {
-  mask-image: var(--secondaryToolbarButton-firstPage-icon);
-}
-
-#lastPage::before {
+.pdfjs-firstPage::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-lastPage-icon);
   mask-image: var(--secondaryToolbarButton-lastPage-icon);
 }
 
-#pageRotateCcw::before {
+.pdfjs-lastPage::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-lastPage-icon);
+  mask-image: var(--secondaryToolbarButton-lastPage-icon);
+}
+
+.pdfjs-pageRotateCcw::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-rotateCcw-icon);
   mask-image: var(--secondaryToolbarButton-rotateCcw-icon);
 }
 
-#pageRotateCw::before {
+.pdfjs-pageRotateCw::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-rotateCw-icon);
   mask-image: var(--secondaryToolbarButton-rotateCw-icon);
 }
 
-#cursorSelectTool::before {
+.pdfjs-cursorSelectTool::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-selectTool-icon);
   mask-image: var(--secondaryToolbarButton-selectTool-icon);
 }
 
-#cursorHandTool::before {
+.pdfjs-cursorHandTool::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-handTool-icon);
   mask-image: var(--secondaryToolbarButton-handTool-icon);
 }
 
 #scrollPage::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-scrollPage-icon);
   mask-image: var(--secondaryToolbarButton-scrollPage-icon);
 }
 
-#scrollVertical::before {
+.pdfjs-scrollVertical::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-scrollVertical-icon);
   mask-image: var(--secondaryToolbarButton-scrollVertical-icon);
 }
 
-#scrollHorizontal::before {
+.pdfjs-scrollHorizontal::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-scrollHorizontal-icon);
   mask-image: var(--secondaryToolbarButton-scrollHorizontal-icon);
 }
 
-#scrollWrapped::before {
+.pdfjs-scrollWrapped::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-scrollWrapped-icon);
   mask-image: var(--secondaryToolbarButton-scrollWrapped-icon);
 }
 
 #spreadNone::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-spreadNone-icon);
   mask-image: var(--secondaryToolbarButton-spreadNone-icon);
 }
 
 #spreadOdd::before {
-  mask-image: var(--secondaryToolbarButton-spreadOdd-icon);
+  -webkit-mask-image: var(--secondaryToolbarButton-spreadNone-icon);
+  mask-image: var(--secondaryToolbarButton-spreadNone-icon);
 }
 
 #spreadEven::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-spreadEven-icon);
   mask-image: var(--secondaryToolbarButton-spreadEven-icon);
 }
 
-#documentProperties::before {
+.pdfjs-documentProperties::before {
+  -webkit-mask-image: var(--secondaryToolbarButton-documentProperties-icon);
   mask-image: var(--secondaryToolbarButton-documentProperties-icon);
 }
 
@@ -1123,14 +1159,14 @@ a.secondaryToolbarButton[href="#"] {
   margin-inline-start: 7px;
 }
 
-#pageNumber {
+input.pdfjs-pageNumber {
   -moz-appearance: textfield; /* hides the spinner in moz */
   text-align: right;
   width: 40px;
   background-size: 0 0;
   transition-property: none;
 }
-#pageNumber.visiblePageIsLoading {
+input.pdfjs-pageNumber.visiblePageIsLoading {
   background-image: var(--loading-icon);
   background-repeat: no-repeat;
   background-position: 3px;
@@ -1141,7 +1177,7 @@ a.secondaryToolbarButton[href="#"] {
   transition-delay: var(--loading-icon-delay);
 }
 /*#if !MOZCENTRAL*/
-#pageNumber::-webkit-inner-spin-button {
+input.pdfjs-pageNumber::-webkit-inner-spin-button {
   -webkit-appearance: none;
 }
 /*#endif*/
@@ -1163,14 +1199,14 @@ a.secondaryToolbarButton[href="#"] {
   cursor: default;
 }
 
-#numPages.toolbarLabel {
+.pdfjs-numPages.toolbarLabel {
   padding-inline-start: 3px;
 }
 
-#thumbnailView,
-#outlineView,
-#attachmentsView,
-#layersView {
+.pdfjs-thumbnailView,
+.pdfjs-outlineView,
+.pdfjs-attachmentsView,
+.pdfjs-layersView {
   position: absolute;
   width: calc(100% - 8px);
   top: 0;
@@ -1179,13 +1215,13 @@ a.secondaryToolbarButton[href="#"] {
   overflow: auto;
   user-select: none;
 }
-#thumbnailView {
+.pdfjs-thumbnailView {
   width: calc(100% - 60px);
   padding: 10px 30px 0;
 }
 
-#thumbnailView > a:active,
-#thumbnailView > a:focus {
+.pdfjs-thumbnailView > a:active,
+.pdfjs-thumbnailView > a:focus {
   outline: 0;
 }
 
@@ -1194,10 +1230,10 @@ a.secondaryToolbarButton[href="#"] {
   margin: 0 10px 5px;
 }
 
-#thumbnailView > a:last-of-type > .thumbnail {
+.pdfjs-thumbnailView > a:last-of-type > .thumbnail {
   margin-bottom: 10px;
 }
-#thumbnailView > a:last-of-type > .thumbnail:not([data-loaded]) {
+.pdfjs-thumbnailView > a:last-of-type > .thumbnail:not([data-loaded]) {
   margin-bottom: 9px;
 }
 
@@ -1265,13 +1301,13 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
   cursor: pointer;
 }
 
-#layersView .treeItem > a * {
+.pdfjs-layersView .treeItem > a * {
   cursor: pointer;
 }
-#layersView .treeItem > a > label {
+.pdfjs-layersView .treeItem > a > label {
   padding-inline-start: 4px;
 }
-#layersView .treeItem > a > label > input {
+.pdfjs-layersView .treeItem > a > label > input {
   float: var(--inline-start);
   margin-top: 1px;
 }
@@ -1285,9 +1321,11 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
 }
 .treeItemToggler::before {
   inset-inline-end: 4px;
+  -webkit-mask-image: var(--treeitem-expanded-icon);
   mask-image: var(--treeitem-expanded-icon);
 }
 .treeItemToggler.treeItemsHidden::before {
+  -webkit-mask-image: var(--treeitem-collapsed-icon);
   mask-image: var(--treeitem-collapsed-icon);
   transform: scaleX(var(--dir-factor));
 }
@@ -1365,29 +1403,29 @@ dialog :link {
   color: rgba(255, 255, 255, 1);
 }
 
-#passwordDialog {
+.pdfjs-passwordDialog {
   text-align: center;
 }
-#passwordDialog .toolbarField {
+.pdfjs-passwordDialog .toolbarField {
   width: 200px;
 }
 
-#documentPropertiesDialog {
+.pdfjs-documentPropertiesDialog {
   text-align: left;
 }
-#documentPropertiesDialog .row > * {
+.pdfjs-documentPropertiesDialog .row > * {
   min-width: 100px;
   text-align: start;
 }
-#documentPropertiesDialog .row > span {
+.pdfjs-documentPropertiesDialog .row > span {
   width: 125px;
   word-wrap: break-word;
 }
-#documentPropertiesDialog .row > p {
+.pdfjs-documentPropertiesDialog .row > p {
   max-width: 225px;
   word-wrap: break-word;
 }
-#documentPropertiesDialog .buttonRow {
+.pdfjs-documentPropertiesDialog .buttonRow {
   margin-top: 10px;
 }
 
@@ -1416,7 +1454,7 @@ dialog :link {
   margin: 0;
 }
 
-#printContainer {
+.pdfjs-printContainer {
   display: none;
 }
 
@@ -1427,14 +1465,14 @@ dialog :link {
   body[data-pdfjsprinting] #outerContainer {
     display: none;
   }
-  body[data-pdfjsprinting] #printContainer {
+  body[data-pdfjsprinting] .pdfjs-printContainer {
     display: block;
   }
-  #printContainer {
+  .pdfjs-printContainer {
     height: 100%;
   }
   /* wrapper around (scaled) print canvas elements */
-  #printContainer > .printedPage {
+  .pdfjs-printContainer > .printedPage {
     page-break-after: always;
     page-break-inside: avoid;
 
@@ -1448,11 +1486,11 @@ dialog :link {
     align-items: center;
   }
 
-  #printContainer > .xfaPrintedPage .xfaPage {
+  .pdfjs-printContainer > .xfaPrintedPage .xfaPage {
     position: absolute;
   }
 
-  #printContainer > .xfaPrintedPage {
+  .pdfjs-printContainer > .xfaPrintedPage {
     page-break-after: always;
     page-break-inside: avoid;
     width: 100%;
@@ -1460,8 +1498,8 @@ dialog :link {
     position: relative;
   }
 
-  #printContainer > .printedPage canvas,
-  #printContainer > .printedPage img {
+  .pdfjs-printContainer > .printedPage canvas,
+  .pdfjs-printContainer > .printedPage img {
     /* The intrinsic canvas / image size will make sure that we fit the page. */
     max-width: 100%;
     max-height: 100%;
@@ -1477,7 +1515,7 @@ dialog :link {
 }
 
 @media all and (max-width: 900px) {
-  #toolbarViewerMiddle {
+  .pdfjs-toolbarViewerMiddle {
     display: table;
     margin: auto;
     left: auto;
@@ -1487,10 +1525,10 @@ dialog :link {
 }
 
 @media all and (max-width: 840px) {
-  #sidebarContainer {
+  .pdfjs-sidebarContainer {
     background-color: var(--sidebar-narrow-bg-color);
   }
-  #outerContainer.sidebarOpen #viewerContainer {
+  #outerContainer.sidebarOpen .pdfjs-viewerContainer {
     inset-inline-start: 0 !important;
   }
 }

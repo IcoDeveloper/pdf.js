@@ -158,6 +158,7 @@ const PDFViewerApplication = {
   pdfDocument: null,
   pdfLoadingTask: null,
   printService: null,
+  hfDocumentDetailRef: null,
   /** @type {PDFViewer} */
   pdfViewer: null,
   /** @type {PDFThumbnailViewer} */
@@ -738,7 +739,7 @@ const PDFViewerApplication = {
   },
 
   get loadingBar() {
-    const barElement = document.getElementById("loadingBar");
+    const barElement = document.getElementsByClassName("pdfjs-loadingBar")[0];
     const bar = barElement ? new ProgressBar(barElement) : null;
     return shadow(this, "loadingBar", bar);
   },
@@ -798,7 +799,7 @@ const PDFViewerApplication = {
         title = url;
       }
     }
-    this.setTitle(title);
+    // this.setTitle(title);
   },
 
   setTitle(title = this._title) {
@@ -886,7 +887,7 @@ const PDFViewerApplication = {
 
     promises.push(this.pdfScriptingManager.destroyPromise);
 
-    this.setTitle();
+    // this.setTitle();
     this.pdfSidebar?.reset();
     this.pdfOutlineViewer?.reset();
     this.pdfAttachmentViewer?.reset();
@@ -938,10 +939,10 @@ const PDFViewerApplication = {
     ) {
       // The Firefox built-in viewer always calls `setTitleUsingUrl`, before
       // `initPassiveLoading`, and it never provides an `originalUrl` here.
-      this.setTitleUsingUrl(
-        args.originalUrl || args.url,
-        /* downloadUrl = */ args.url
-      );
+      // this.setTitleUsingUrl(
+      //   args.originalUrl || args.url,
+      //   /* downloadUrl = */ args.url
+      // );
     }
     // Set the necessary API parameters, using all the available options.
     const apiParams = AppOptions.getAll(OptionKind.API);
@@ -1008,18 +1009,20 @@ const PDFViewerApplication = {
   },
 
   async download() {
-    const url = this._downloadUrl,
-      filename = this._docFilename;
+    const url = this._downloadUrl;
+    const filename = this._docFilename;
     try {
       this._ensureDownloadComplete();
 
       const data = await this.pdfDocument.getData();
       const blob = new Blob([data], { type: "application/pdf" });
+      PDFViewerApplication.hfDocumentDetailRef.savePDF(blob);
 
-      await this.downloadManager.download(blob, url, filename);
+      // await this.downloadManager.download(blob, url, filename);
     } catch (reason) {
       // When the PDF document isn't ready, or the PDF file is still
       // downloading, simply download using the URL.
+      PDFViewerApplication.hfDocumentDetailRef.savePDF(null, reason);
       await this.downloadManager.downloadUrl(url, filename);
     }
   },
@@ -1031,15 +1034,13 @@ const PDFViewerApplication = {
     this._saveInProgress = true;
     await this.pdfScriptingManager.dispatchWillSave();
 
-    const url = this._downloadUrl,
-      filename = this._docFilename;
     try {
       this._ensureDownloadComplete();
 
       const data = await this.pdfDocument.saveDocument();
       const blob = new Blob([data], { type: "application/pdf" });
-
-      await this.downloadManager.download(blob, url, filename);
+      PDFViewerApplication.hfDocumentDetailRef.savePDF(blob);
+      // await this.downloadManager.download(blob, url, filename);
     } catch (reason) {
       // When the PDF document isn't ready, or the PDF file is still
       // downloading, simply fallback to a "regular" download.
@@ -1061,6 +1062,7 @@ const PDFViewerApplication = {
   downloadOrSave() {
     if (this.pdfDocument?.annotationStorage.size > 0) {
       this.save();
+
     } else {
       this.download();
     }
@@ -1466,8 +1468,12 @@ const PDFViewerApplication = {
    * @private
    */
   async _initializeMetadata(pdfDocument) {
-    const { info, metadata, contentDispositionFilename, contentLength } =
-      await pdfDocument.getMetadata();
+    const {
+      info,
+      metadata,
+      contentDispositionFilename,
+      contentLength,
+    } = await pdfDocument.getMetadata();
 
     if (pdfDocument !== this.pdfDocument) {
       return; // The document was closed while the metadata resolved.
@@ -1483,29 +1489,29 @@ const PDFViewerApplication = {
         `${(info.Producer || "-").trim()} / ${(info.Creator || "-").trim()}] ` +
         `(PDF.js: ${version || "?"} [${build || "?"}])`
     );
-    let pdfTitle = info.Title;
+    // let pdfTitle = info.Title;
 
-    const metadataTitle = metadata?.get("dc:title");
-    if (metadataTitle) {
-      // Ghostscript can produce invalid 'dc:title' Metadata entries:
-      //  - The title may be "Untitled" (fixes bug 1031612).
-      //  - The title may contain incorrectly encoded characters, which thus
-      //    looks broken, hence we ignore the Metadata entry when it contains
-      //    characters from the Specials Unicode block (fixes bug 1605526).
-      if (
-        metadataTitle !== "Untitled" &&
-        !/[\uFFF0-\uFFFF]/g.test(metadataTitle)
-      ) {
-        pdfTitle = metadataTitle;
-      }
-    }
-    if (pdfTitle) {
-      this.setTitle(
-        `${pdfTitle} - ${this._contentDispositionFilename || this._title}`
-      );
-    } else if (this._contentDispositionFilename) {
-      this.setTitle(this._contentDispositionFilename);
-    }
+    // const metadataTitle = metadata?.get("dc:title");
+    // if (metadataTitle) {
+    //   // Ghostscript can produce invalid 'dc:title' Metadata entries:
+    //   //  - The title may be "Untitled" (fixes bug 1031612).
+    //   //  - The title may contain incorrectly encoded characters, which thus
+    //   //    looks broken, hence we ignore the Metadata entry when it contains
+    //   //    characters from the Specials Unicode block (fixes bug 1605526).
+    //   if (
+    //     metadataTitle !== "Untitled" &&
+    //     !/[\uFFF0-\uFFFF]/g.test(metadataTitle)
+    //   ) {
+    //     pdfTitle = metadataTitle;
+    //   }
+    // }
+    // if (pdfTitle) {
+    //   this.setTitle(
+    //     `${pdfTitle} - ${this._contentDispositionFilename || this._title}`
+    //   );
+    // } else if (this._contentDispositionFilename) {
+    //   this.setTitle(this._contentDispositionFilename);
+    // }
 
     if (
       info.IsXFAPresent &&
@@ -1639,7 +1645,7 @@ const PDFViewerApplication = {
     };
     annotationStorage.onAnnotationEditor = typeStr => {
       this._hasAnnotationEditors = !!typeStr;
-      this.setTitle();
+      // this.setTitle();
 
       if (typeStr) {
         this.externalServices.reportTelemetry({
@@ -1766,8 +1772,8 @@ const PDFViewerApplication = {
     const pagesOverview = this.pdfViewer.getPagesOverview();
     const printContainer = this.appConfig.printContainer;
     const printResolution = AppOptions.get("printResolution");
-    const optionalContentConfigPromise =
-      this.pdfViewer.optionalContentConfigPromise;
+    const optionalContentConfigPromise = this.pdfViewer
+      .optionalContentConfigPromise;
 
     const printService = PDFPrintServiceFactory.instance.createPrintService(
       this.pdfDocument,
@@ -1781,7 +1787,7 @@ const PDFViewerApplication = {
     this.printService = printService;
     this.forceRendering();
     // Disable the editor-indicator during printing (fixes bug 1790552).
-    this.setTitle();
+    // this.setTitle();
 
     printService.layout();
 
@@ -1809,7 +1815,7 @@ const PDFViewerApplication = {
     }
     this.forceRendering();
     // Re-enable the editor-indicator after printing (fixes bug 1790552).
-    this.setTitle();
+    // this.setTitle();
   },
 
   rotatePages(delta) {
@@ -2275,7 +2281,7 @@ function webViewerInitialized() {
         PDFViewerApplication._hideViewBookmark();
       }
     } else if (PDFJSDev.test("MOZCENTRAL || CHROME")) {
-      PDFViewerApplication.setTitleUsingUrl(file, /* downloadUrl = */ file);
+      // PDFViewerApplication.setTitleUsingUrl(file, /* downloadUrl = */ file);
       PDFViewerApplication.initPassiveLoading();
     } else {
       throw new Error("Not implemented: webViewerInitialized");

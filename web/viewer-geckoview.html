@@ -77,26 +77,26 @@ See https://github.com/adobe-type-tools/cmap-resources
   </head>
 
   <body tabindex="1">
-    <div id="outerContainer">
+    <div class="pdfjs-outerContainer">
 
-      <div id="mainContainer">
+      <div class="pdfjs-mainContainer">
 
-        <div id="viewerContainer" tabindex="0">
-          <div id="viewer" class="pdfViewer"></div>
+        <div class="pdfjs-viewerContainer" tabindex="0">
+          <div class="pdfjs-viewer pdfViewer"></div>
         </div>
       </div> <!-- mainContainer -->
 
-      <div id="dialogContainer">
-        <dialog id="passwordDialog">
+      <div class="pdfjs-dialogContainer">
+        <dialog class="pdfjs-passwordDialog">
           <div class="row">
-            <label for="password" id="passwordText" data-l10n-id="password_label">Enter the password to open this PDF file:</label>
+            <label for="{0}_password" class="pdfjs-passwordText" data-l10n-id="password_label">Enter the password to open this PDF file:</label>
           </div>
           <div class="row">
-            <input type="password" id="password" class="toolbarField">
+            <input type="password" id="{0}_password" class="pdfjs-password toolbarField">
           </div>
           <div class="buttonRow">
-            <button id="passwordCancel" class="dialogButton"><span data-l10n-id="password_cancel">Cancel</span></button>
-            <button id="passwordSubmit" class="dialogButton"><span data-l10n-id="password_ok">OK</span></button>
+            <button class="pdfjs-passwordCancel dialogButton"><span data-l10n-id="password_cancel">Cancel</span></button>
+            <button class="pdfjs-passwordSubmit dialogButton"><span data-l10n-id="password_ok">OK</span></button>
           </div>
         </dialog>
       </div>  <!-- dialogContainer -->
@@ -104,7 +104,7 @@ See https://github.com/adobe-type-tools/cmap-resources
     </div> <!-- outerContainer -->
 
 <!--#if !MOZCENTRAL-->
-    <input type="file" id="fileInput" class="hidden">
+    <input type="file" class="pdfjs-fileInput hidden">
 <!--#endif-->
 
   </body>

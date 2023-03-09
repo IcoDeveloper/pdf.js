@@ -79,35 +79,35 @@
   color: grey;
 }
 
-#viewer.textLayer-visible .textLayer {
+.pdfjs-viewer.textLayer-visible .textLayer {
   opacity: 1;
 }
 
-#viewer.textLayer-visible .canvasWrapper {
+.pdfjs-viewer.textLayer-visible .canvasWrapper {
   background-color: rgba(128, 255, 128, 1);
 }
 
-#viewer.textLayer-visible .canvasWrapper canvas {
+.pdfjs-viewer.textLayer-visible .canvasWrapper canvas {
   mix-blend-mode: screen;
 }
 
-#viewer.textLayer-visible .textLayer span {
+.pdfjs-viewer.textLayer-visible .textLayer span {
   background-color: rgba(255, 255, 0, 0.1);
   color: rgba(0, 0, 0, 1);
   border: solid 1px rgba(255, 0, 0, 0.5);
   box-sizing: border-box;
 }
 
-#viewer.textLayer-visible .textLayer span[aria-owns] {
+.pdfjs-viewer.textLayer-visible .textLayer span[aria-owns] {
   background-color: rgba(255, 0, 0, 0.3);
 }
 
-#viewer.textLayer-hover .textLayer span:hover {
+.pdfjs-viewer.textLayer-hover .textLayer span:hover {
   background-color: rgba(255, 255, 255, 1);
   color: rgba(0, 0, 0, 1);
 }
 
-#viewer.textLayer-shadow .textLayer span {
+.pdfjs-viewer.textLayer-shadow .textLayer span {
   background-color: rgba(255, 255, 255, 0.6);
   color: rgba(0, 0, 0, 1);
 }

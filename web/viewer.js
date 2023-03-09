@@ -35,145 +35,210 @@ const AppConstants =
 window.PDFViewerApplication = PDFViewerApplication;
 window.PDFViewerApplicationConstants = AppConstants;
 window.PDFViewerApplicationOptions = AppOptions;
+window.webViewerLoad = webViewerLoad;
 
-function getViewerConfiguration() {
+function getViewerConfiguration(viewerCtId) {
+  const ctElement = document.getElementById(viewerCtId);
   return {
-    appContainer: document.body,
-    mainContainer: document.getElementById("viewerContainer"),
-    viewerContainer: document.getElementById("viewer"),
+    appContainer: document.getElementById(viewerCtId),
+    mainContainer: ctElement.getElementsByClassName("pdfjs-viewerContainer")[0],
+    viewerContainer: ctElement.getElementsByClassName("pdfjs-viewer")[0],
     toolbar: {
-      container: document.getElementById("toolbarViewer"),
-      numPages: document.getElementById("numPages"),
-      pageNumber: document.getElementById("pageNumber"),
-      scaleSelect: document.getElementById("scaleSelect"),
-      customScaleOption: document.getElementById("customScaleOption"),
-      previous: document.getElementById("previous"),
-      next: document.getElementById("next"),
-      zoomIn: document.getElementById("zoomIn"),
-      zoomOut: document.getElementById("zoomOut"),
-      viewFind: document.getElementById("viewFind"),
-      openFile:
-        typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-          ? document.getElementById("openFile")
-          : null,
-      print: document.getElementById("print"),
-      editorFreeTextButton: document.getElementById("editorFreeText"),
-      editorFreeTextParamsToolbar: document.getElementById(
-        "editorFreeTextParamsToolbar"
-      ),
-      editorInkButton: document.getElementById("editorInk"),
-      editorInkParamsToolbar: document.getElementById("editorInkParamsToolbar"),
-      download: document.getElementById("download"),
+      container: ctElement.getElementsByClassName("pdfjs-toolbarViewer")[0],
+      numPages: ctElement.getElementsByClassName("pdfjs-numPages")[0],
+      pageNumber: ctElement.getElementsByClassName("pdfjs-pageNumber")[0],
+      scaleSelect: ctElement.getElementsByClassName("pdfjs-scaleSelect")[0],
+      customScaleOption: ctElement.getElementsByClassName(
+        "pdfjs-customScaleOption"
+      )[0],
+      previous: ctElement.getElementsByClassName("pdfjs-previous")[0],
+      next: ctElement.getElementsByClassName("pdfjs-next")[0],
+      zoomIn: ctElement.getElementsByClassName("pdfjs-zoomIn")[0],
+      zoomOut: ctElement.getElementsByClassName("pdfjs-zoomOut")[0],
+      viewFind: ctElement.getElementsByClassName("pdfjs-viewFind")[0],
+      openFile: ctElement.getElementsByClassName("pdfjs-openFile")[0],
+      print: ctElement.getElementsByClassName("pdfjs-print")[0],
+      editorFreeTextButton: ctElement.getElementsByClassName(
+        "pdfjs-editorFreeText"
+      )[0],
+      editorFreeTextParamsToolbar: ctElement.getElementsByClassName(
+        "pdfjs-editorFreeTextParamsToolbar"
+      )[0],
+      editorInkButton: ctElement.getElementsByClassName("pdfjs-editorInk")[0],
+      editorInkParamsToolbar: ctElement.getElementsByClassName(
+        "pdfjs-editorInkParamsToolbar"
+      )[0],
+      download: ctElement.getElementsByClassName("pdfjs-download")[0],
     },
     secondaryToolbar: {
-      toolbar: document.getElementById("secondaryToolbar"),
-      toggleButton: document.getElementById("secondaryToolbarToggle"),
-      presentationModeButton: document.getElementById("presentationMode"),
-      openFileButton:
-        typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-          ? document.getElementById("secondaryOpenFile")
-          : null,
-      printButton: document.getElementById("secondaryPrint"),
-      downloadButton: document.getElementById("secondaryDownload"),
-      viewBookmarkButton: document.getElementById("viewBookmark"),
-      firstPageButton: document.getElementById("firstPage"),
-      lastPageButton: document.getElementById("lastPage"),
-      pageRotateCwButton: document.getElementById("pageRotateCw"),
-      pageRotateCcwButton: document.getElementById("pageRotateCcw"),
-      cursorSelectToolButton: document.getElementById("cursorSelectTool"),
-      cursorHandToolButton: document.getElementById("cursorHandTool"),
-      scrollPageButton: document.getElementById("scrollPage"),
-      scrollVerticalButton: document.getElementById("scrollVertical"),
-      scrollHorizontalButton: document.getElementById("scrollHorizontal"),
-      scrollWrappedButton: document.getElementById("scrollWrapped"),
-      spreadNoneButton: document.getElementById("spreadNone"),
-      spreadOddButton: document.getElementById("spreadOdd"),
-      spreadEvenButton: document.getElementById("spreadEven"),
-      documentPropertiesButton: document.getElementById("documentProperties"),
+      toolbar: ctElement.getElementsByClassName("pdfjs-secondaryToolbar")[0],
+      toggleButton: ctElement.getElementsByClassName(
+        "pdfjs-secondaryToolbarToggle"
+      )[0],
+      presentationModeButton: ctElement.getElementsByClassName(
+        "pdfjs-presentationMode"
+      )[0],
+      openFileButton: ctElement.getElementsByClassName(
+        "pdfjs-secondaryOpenFile"
+      )[0],
+      printButton: ctElement.getElementsByClassName("pdfjs-secondaryPrint")[0],
+      downloadButton: ctElement.getElementsByClassName(
+        "pdfjs-secondaryDownload"
+      )[0],
+      viewBookmarkButton:
+        ctElement.getElementsByClassName("pdfjs-viewBookmark")[0],
+      firstPageButton: ctElement.getElementsByClassName("pdfjs-firstPage")[0],
+      lastPageButton: ctElement.getElementsByClassName("pdfjs-lastPage")[0],
+      pageRotateCwButton:
+        ctElement.getElementsByClassName("pdfjs-pageRotateCw")[0],
+      pageRotateCcwButton: ctElement.getElementsByClassName(
+        "pdfjs-pageRotateCcw"
+      )[0],
+      cursorSelectToolButton: ctElement.getElementsByClassName(
+        "pdfjs-cursorSelectTool"
+      )[0],
+      cursorHandToolButton: ctElement.getElementsByClassName(
+        "pdfjs-cursorHandTool"
+      )[0],
+      scrollPageButton: ctElement.getElementsByClassName("pdfjs-scrollPage")[0],
+      scrollVerticalButton: ctElement.getElementsByClassName(
+        "pdfjs-scrollVertical"
+      )[0],
+      scrollHorizontalButton: ctElement.getElementsByClassName(
+        "pdfjs-scrollHorizontal"
+      )[0],
+      scrollWrappedButton: ctElement.getElementsByClassName(
+        "pdfjs-scrollWrapped"
+      )[0],
+      spreadNoneButton: ctElement.getElementsByClassName("pdfjs-spreadNone")[0],
+      spreadOddButton: ctElement.getElementsByClassName("pdfjs-spreadOdd")[0],
+      spreadEvenButton: ctElement.getElementsByClassName("pdfjs-spreadEven")[0],
+      documentPropertiesButton: ctElement.getElementsByClassName(
+        "pdfjs-documentProperties"
+      )[0],
     },
     sidebar: {
       // Divs (and sidebar button)
       outerContainer: document.getElementById("outerContainer"),
-      sidebarContainer: document.getElementById("sidebarContainer"),
-      toggleButton: document.getElementById("sidebarToggle"),
+      sidebarContainer: ctElement.getElementsByClassName(
+        "pdfjs-sidebarContainer"
+      )[0],
+      toggleButton: ctElement.getElementsByClassName("pdfjs-sidebarToggle")[0],
       // Buttons
-      thumbnailButton: document.getElementById("viewThumbnail"),
-      outlineButton: document.getElementById("viewOutline"),
-      attachmentsButton: document.getElementById("viewAttachments"),
-      layersButton: document.getElementById("viewLayers"),
+      thumbnailButton: ctElement.getElementsByClassName(
+        "pdfjs-viewThumbnail"
+      )[0],
+      outlineButton: ctElement.getElementsByClassName("pdfjs-viewOutline")[0],
+      attachmentsButton: ctElement.getElementsByClassName(
+        "pdfjs-viewAttachments"
+      )[0],
+      layersButton: ctElement.getElementsByClassName("pdfjs-viewLayers")[0],
       // Views
-      thumbnailView: document.getElementById("thumbnailView"),
-      outlineView: document.getElementById("outlineView"),
-      attachmentsView: document.getElementById("attachmentsView"),
-      layersView: document.getElementById("layersView"),
+      thumbnailView: ctElement.getElementsByClassName("pdfjs-thumbnailView")[0],
+      outlineView: ctElement.getElementsByClassName("pdfjs-outlineView")[0],
+      attachmentsView: ctElement.getElementsByClassName(
+        "pdfjs-attachmentsView"
+      )[0],
+      layersView: ctElement.getElementsByClassName("pdfjs-layersView")[0],
       // View-specific options
-      outlineOptionsContainer: document.getElementById(
-        "outlineOptionsContainer"
-      ),
-      currentOutlineItemButton: document.getElementById("currentOutlineItem"),
+      outlineOptionsContainer: ctElement.getElementsByClassName(
+        "pdfjs-outlineOptionsContainer"
+      )[0],
+      currentOutlineItemButton: ctElement.getElementsByClassName(
+        "pdfjs-currentOutlineItem"
+      )[0],
     },
     sidebarResizer: {
       outerContainer: document.getElementById("outerContainer"),
-      resizer: document.getElementById("sidebarResizer"),
+      resizer: ctElement.getElementsByClassName("pdfjs-sidebarResizer")[0],
     },
     findBar: {
-      bar: document.getElementById("findbar"),
-      toggleButton: document.getElementById("viewFind"),
-      findField: document.getElementById("findInput"),
-      highlightAllCheckbox: document.getElementById("findHighlightAll"),
-      caseSensitiveCheckbox: document.getElementById("findMatchCase"),
-      matchDiacriticsCheckbox: document.getElementById("findMatchDiacritics"),
-      entireWordCheckbox: document.getElementById("findEntireWord"),
-      findMsg: document.getElementById("findMsg"),
-      findResultsCount: document.getElementById("findResultsCount"),
-      findPreviousButton: document.getElementById("findPrevious"),
-      findNextButton: document.getElementById("findNext"),
+      bar: ctElement.getElementsByClassName("pdfjs-findbar")[0],
+      toggleButton: ctElement.getElementsByClassName("pdfjs-viewFind")[0],
+      findField: ctElement.getElementsByClassName("pdfjs-findInput")[0],
+      highlightAllCheckbox: ctElement.getElementsByClassName(
+        "pdfjs-findHighlightAll"
+      )[0],
+      caseSensitiveCheckbox: ctElement.getElementsByClassName(
+        "pdfjs-findMatchCase"
+      )[0],
+      matchDiacriticsCheckbox: ctElement.getElementsByClassName(
+        "pdfjs-findMatchDiacritics"
+      )[0],
+      entireWordCheckbox: ctElement.getElementsByClassName(
+        "pdfjs-findEntireWord"
+      )[0],
+      findMsg: ctElement.getElementsByClassName("pdfjs-findMsg")[0],
+      findResultsCount: ctElement.getElementsByClassName(
+        "pdfjs-findResultsCount"
+      )[0],
+      findPreviousButton:
+        ctElement.getElementsByClassName("pdfjs-findPrevious")[0],
+      findNextButton: ctElement.getElementsByClassName("pdfjs-findNext")[0],
     },
     passwordOverlay: {
-      dialog: document.getElementById("passwordDialog"),
-      label: document.getElementById("passwordText"),
-      input: document.getElementById("password"),
-      submitButton: document.getElementById("passwordSubmit"),
-      cancelButton: document.getElementById("passwordCancel"),
+      dialog: ctElement.getElementsByClassName("pdfjs-passwordDialog")[0],
+      label: ctElement.getElementsByClassName("pdfjs-passwordText")[0],
+      input: ctElement.getElementsByClassName("pdfjs-password")[0],
+      submitButton: ctElement.getElementsByClassName("pdfjs-passwordSubmit")[0],
+      cancelButton: ctElement.getElementsByClassName("pdfjs-passwordCancel")[0],
     },
     documentProperties: {
-      dialog: document.getElementById("documentPropertiesDialog"),
-      closeButton: document.getElementById("documentPropertiesClose"),
+      dialog: ctElement.getElementsByClassName(
+        "pdfjs-documentPropertiesDialog"
+      )[0],
+      closeButton: ctElement.getElementsByClassName(
+        "pdfjs-documentPropertiesClose"
+      )[0],
       fields: {
-        fileName: document.getElementById("fileNameField"),
-        fileSize: document.getElementById("fileSizeField"),
-        title: document.getElementById("titleField"),
-        author: document.getElementById("authorField"),
-        subject: document.getElementById("subjectField"),
-        keywords: document.getElementById("keywordsField"),
-        creationDate: document.getElementById("creationDateField"),
-        modificationDate: document.getElementById("modificationDateField"),
-        creator: document.getElementById("creatorField"),
-        producer: document.getElementById("producerField"),
-        version: document.getElementById("versionField"),
-        pageCount: document.getElementById("pageCountField"),
-        pageSize: document.getElementById("pageSizeField"),
-        linearized: document.getElementById("linearizedField"),
+        fileName: ctElement.getElementsByClassName("pdfjs-fileNameField")[0],
+        fileSize: ctElement.getElementsByClassName("pdfjs-fileSizeField")[0],
+        title: ctElement.getElementsByClassName("pdfjs-titleField")[0],
+        author: ctElement.getElementsByClassName("pdfjs-authorField")[0],
+        subject: ctElement.getElementsByClassName("pdfjs-subjectField")[0],
+        keywords: ctElement.getElementsByClassName("pdfjs-keywordsField")[0],
+        creationDate: ctElement.getElementsByClassName(
+          "pdfjs-creationDateField"
+        )[0],
+        modificationDate: ctElement.getElementsByClassName(
+          "pdfjs-modificationDateField"
+        )[0],
+        creator: ctElement.getElementsByClassName("pdfjs-creatorField")[0],
+        producer: ctElement.getElementsByClassName("pdfjs-producerField")[0],
+        version: ctElement.getElementsByClassName("pdfjs-versionField")[0],
+        pageCount: ctElement.getElementsByClassName("pdfjs-pageCountField")[0],
+        pageSize: ctElement.getElementsByClassName("pdfjs-pageSizeField")[0],
+        linearized: ctElement.getElementsByClassName(
+          "pdfjs-linearizedField"
+        )[0],
       },
     },
     annotationEditorParams: {
-      editorFreeTextFontSize: document.getElementById("editorFreeTextFontSize"),
-      editorFreeTextColor: document.getElementById("editorFreeTextColor"),
-      editorInkColor: document.getElementById("editorInkColor"),
-      editorInkThickness: document.getElementById("editorInkThickness"),
-      editorInkOpacity: document.getElementById("editorInkOpacity"),
+      editorFreeTextFontSize: ctElement.getElementsByClassName(
+        "pdfjs-editorFreeTextFontSize"
+      )[0],
+      editorFreeTextColor: ctElement.getElementsByClassName(
+        "pdfjs-editorFreeTextColor"
+      )[0],
+      editorInkColor: ctElement.getElementsByClassName(
+        "pdfjs-editorInkColor"
+      )[0],
+      editorInkThickness: ctElement.getElementsByClassName(
+        "pdfjs-editorInkThickness"
+      )[0],
+      editorInkOpacity: ctElement.getElementsByClassName(
+        "pdfjs-editorInkOpacity"
+      )[0],
     },
-    printContainer: document.getElementById("printContainer"),
-    openFileInput:
-      typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")
-        ? document.getElementById("fileInput")
-        : null,
+    printContainer: document.getElementsByClassName("pdfjs-printContainer")[0],
+    openFileInput: document.getElementsByClassName("pdfjs-fileInput")[0],
     debuggerScriptPath: "./debugger.js",
   };
 }
 
-function webViewerLoad() {
-  const config = getViewerConfiguration();
+function webViewerLoad(blobUrl, hfDocumentDetailRef, _viewerCtId) {
+  const viewerCtId = _viewerCtId ?? "outerContainer";
+  const config = getViewerConfiguration(viewerCtId);
 
   if (typeof PDFJSDev !== "undefined" && PDFJSDev.test("GENERIC")) {
     // Give custom implementations of the default viewer a simpler way to
@@ -195,6 +260,11 @@ function webViewerLoad() {
       document.dispatchEvent(event);
     }
   }
+  if (blobUrl && hfDocumentDetailRef) {
+    AppOptions.set("defaultUrl", blobUrl);
+    PDFViewerApplication.hfDocumentDetailRef = hfDocumentDetailRef;
+    PDFViewerApplication.loadingBar.hide();
+  }
   PDFViewerApplication.run(config);
 }
 
@@ -202,12 +272,7 @@ function webViewerLoad() {
 // works in Firefox; see https://bugzilla.mozilla.org/show_bug.cgi?id=1618553
 document.blockUnblockOnload?.(true);
 
-if (
-  document.readyState === "interactive" ||
-  document.readyState === "complete"
-) {
-  webViewerLoad();
-} else {
+if (!window.HybridForms) {
   document.addEventListener("DOMContentLoaded", webViewerLoad, true);
 }
 

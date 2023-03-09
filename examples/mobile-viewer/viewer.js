@@ -15,6 +15,8 @@
 
 "use strict";
 
+import { AppOptions } from "../../web/app_options";
+
 if (!pdfjsLib.getDocument || !pdfjsViewer.PDFViewer) {
   // eslint-disable-next-line no-alert
   alert("Please build the pdfjs-dist library using\n `gulp dist-install`");
@@ -161,7 +163,7 @@ const PDFViewerApplication = {
   },
 
   get loadingBar() {
-    const bar = document.getElementById("loadingBar");
+    const bar = document.getElementsByClassName("pdfjs-loadingBar")[0];
     return pdfjsLib.shadow(
       this,
       "loadingBar",

@@ -33,11 +33,11 @@ limitations under the License.
       <h1 id="title"></h1>
     </header>
 
-    <div id="viewerContainer">
-      <div id="viewer" class="pdfViewer"></div>
+    <div class="pdfjs-viewerContainer">
+      <div class="pdfjs-viewer pdfViewer"></div>
     </div>
 
-    <div id="loadingBar">
+    <div class="pdfjs-loadingBar">
       <div class="progress"></div>
       <div class="glimmer"></div>
     </div>
@@ -62,13 +62,13 @@ limitations under the License.
     </div>
 
     <footer>
-      <button class="toolbarButton pageUp" title="Previous Page" id="previous"></button>
-      <button class="toolbarButton pageDown" title="Next Page" id="next"></button>
+      <button class="pdfjs-previous toolbarButton pageUp" title="Previous Page"></button>
+      <button class="pdfjs-next toolbarButton pageDown" title="Next Page"></button>
 
-      <input type="number" id="pageNumber" class="toolbarField pageNumber" value="1" size="4" min="1">
+      <input type="number" class="pdfjs-pageNumber toolbarField pageNumber" value="1" size="4" min="1">
 
-      <button class="toolbarButton zoomOut" title="Zoom Out" id="zoomOut"></button>
-      <button class="toolbarButton zoomIn" title="Zoom In" id="zoomIn"></button>
+      <button class="pdfjs-zoomOut toolbarButton zoomOut" title="Zoom Out"></button>
+      <button class="pdfjs-zoomIn toolbarButton zoomIn" title="Zoom In"></button>
     </footer>
 
      <script src="viewer.js"></script>
