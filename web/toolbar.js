@@ -22,6 +22,7 @@ import {
   noContextMenuHandler,
 } from "./ui_utils.js";
 import { AnnotationEditorType } from "pdfjs-lib";
+import { AppOptions } from "./app_options.js";
 
 const PAGE_NUMBER_LOADING_INDICATOR = "visiblePageIsLoading";
 
@@ -63,36 +64,52 @@ class Toolbar {
       { element: options.next, eventName: "nextpage" },
       { element: options.zoomIn, eventName: "zoomin" },
       { element: options.zoomOut, eventName: "zoomout" },
-      { element: options.print, eventName: "print" },
-      { element: options.download, eventName: "download" },
-      {
-        element: options.editorFreeTextButton,
-        eventName: "switchannotationeditormode",
-        eventDetails: {
-          get mode() {
-            const { classList } = options.editorFreeTextButton;
-            return classList.contains("toggled")
-              ? AnnotationEditorType.NONE
-              : AnnotationEditorType.FREETEXT;
-          },
-        },
-      },
-      {
-        element: options.editorInkButton,
-        eventName: "switchannotationeditormode",
-        eventDetails: {
-          get mode() {
-            const { classList } = options.editorInkButton;
-            return classList.contains("toggled")
-              ? AnnotationEditorType.NONE
-              : AnnotationEditorType.INK;
-          },
-        },
-      },
     ];
-    if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
+    if (
+      (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) &&
+      !AppOptions.get("hideOpenFileButton")
+    ) {
       this.buttons.push({ element: options.openFile, eventName: "openfile" });
     }
+
+    if (!AppOptions.get("hidePrintButton")) {
+      this.buttons.push({ element: options.print, eventName: "print" });
+    }
+
+    if (!AppOptions.get("hideDownloadButton")) {
+      this.buttons.push({ element: options.download, eventName: "download" });
+    }
+
+    if (!AppOptions.get("hideEditorModeButtons")) {
+      this.buttons.push(
+        {
+          element: options.editorFreeTextButton,
+          eventName: "switchannotationeditormode",
+          eventDetails: {
+            get mode() {
+              const { classList } = options.editorFreeTextButton;
+              return classList.contains("toggled")
+                ? AnnotationEditorType.NONE
+                : AnnotationEditorType.FREETEXT;
+            },
+          },
+        },
+        {
+          element: options.editorInkButton,
+          eventName: "switchannotationeditormode",
+          eventDetails: {
+            get mode() {
+              const { classList } = options.editorInkButton;
+              return classList.contains("toggled")
+                ? AnnotationEditorType.NONE
+                : AnnotationEditorType.INK;
+            },
+          },
+        },
+        { element: options.undoButton, eventName: "undo" }
+      );
+    }
+
     this.items = {
       numPages: options.numPages,
       pageNumber: options.pageNumber,

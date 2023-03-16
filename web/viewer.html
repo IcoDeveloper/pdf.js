@@ -87,13 +87,13 @@ See https://github.com/adobe-type-tools/cmap-resources
 </head>
 
 <body tabindex="1">
-  <div id="outerContainer">
+  <div id="outerContainer" class="pdfjs-container">
     <div class="pdfjs-sidebarContainer">
       <div class="pdfjs-toolbarSidebar">
         <div class="pdfjs-toolbarSidebarLeft">
           <div class="pdfjs-sidebarViewButtons splitToolbarButton toggled" role="radiogroup">
-            <button class="pdfjs-viewThumbnail toolbarButton toggled" title="Show Thumbnails"
-              tabindex="2" data-l10n-id="thumbs" role="radio" aria-checked="true" aria-controls="thumbnailView">
+            <button class="pdfjs-viewThumbnail toolbarButton toggled" title="Show Thumbnails" tabindex="2"
+              data-l10n-id="thumbs" role="radio" aria-checked="true" aria-controls="thumbnailView">
               <span data-l10n-id="thumbs_label">Thumbnails</span>
             </button>
             <button class="pdfjs-viewOutline toolbarButton"
@@ -233,6 +233,13 @@ See https://github.com/adobe-type-tools/cmap-resources
             <span data-l10n-id="save_label">Save</span>
           </button>
 
+          <div class="horizontalToolbarSeparator visibleLargeView"></div>
+
+          <button class="pdfjs-secondaryUndo secondaryToolbarButton visibleMediumView" title="Undo" tabindex="53"
+            data-l10n-id="undo">
+            <span data-l10n-id="undo_title">Undo</span>
+          </button>
+
           <!--#if GENERIC-->
           <div class="horizontalToolbarSeparator visibleLargeView"></div>
           <!--#else-->
@@ -361,6 +368,30 @@ See https://github.com/adobe-type-tools/cmap-resources
               <span class="pdfjs-numPages toolbarLabel"></span>
             </div>
             <div class="pdfjs-toolbarViewerRight">
+              <div class="pdfjs-editorModeButtons splitToolbarButton toggled" role="radiogroup">
+                <button class="pdfjs-editorFreeText toolbarButton" disabled="disabled" title="Text" role="radio"
+                  aria-checked="false" tabindex="34" data-l10n-id="editor_free_text2">
+                  <span data-l10n-id="editor_free_text2_label">Text</span>
+                </button>
+                <button class="pdfjs-editorInk toolbarButton" disabled="disabled" title="Draw" role="radio"
+                  aria-checked="false" tabindex="35" data-l10n-id="editor_ink2">
+                  <span data-l10n-id="editor_ink2_label">Draw</span>
+                </button>
+                <button class="pdfjs-undo toolbarButton" disabled="disabled" title="Undo" role="radio"
+                  aria-checked="false" tabindex="36"  data-l10n-id="undo">
+                  <span data-l10n-id="undo_title">Undo</span>
+                </button>
+              </div>
+
+              <div class="pdfjs-editorModeSeparator verticalToolbarSeparator"></div>
+
+              <button class="pdfjs-secondaryToolbarToggle toolbarButton" title="Tools" tabindex="48"
+                data-l10n-id="tools" aria-expanded="false" aria-controls="secondaryToolbar">
+                <span data-l10n-id="tools_label">Tools</span>
+              </button>
+
+              <div class="verticalToolbarSeparator hiddenMediumView"></div>
+
               <!--#if GENERIC-->
               <button class="pdfjs-openFile toolbarButton hiddenLargeView" title="Open File" tabindex="31"
                 data-l10n-id="open_file">
@@ -378,25 +409,7 @@ See https://github.com/adobe-type-tools/cmap-resources
                 <span data-l10n-id="save_label">Save</span>
               </button>
 
-              <div class="verticalToolbarSeparator hiddenMediumView"></div>
 
-              <div class="pdfjs-editorModeButtons splitToolbarButton toggled" role="radiogroup">
-                <button class="pdfjs-editorFreeText toolbarButton" disabled="disabled" title="Text" role="radio"
-                  aria-checked="false" tabindex="34" data-l10n-id="editor_free_text2">
-                  <span data-l10n-id="editor_free_text2_label">Text</span>
-                </button>
-                <button class="pdfjs-editorInk toolbarButton" disabled="disabled" title="Draw" role="radio"
-                  aria-checked="false" tabindex="35" data-l10n-id="editor_ink2">
-                  <span data-l10n-id="editor_ink2_label">Draw</span>
-                </button>
-              </div>
-
-              <div class="pdfjs-editorModeSeparator verticalToolbarSeparator"></div>
-
-              <button class="pdfjs-secondaryToolbarToggle toolbarButton" title="Tools" tabindex="48"
-                data-l10n-id="tools" aria-expanded="false" aria-controls="secondaryToolbar">
-                <span data-l10n-id="tools_label">Tools</span>
-              </button>
             </div>
             <div class="pdfjs-toolbarViewerMiddle">
               <div class="splitToolbarButton">

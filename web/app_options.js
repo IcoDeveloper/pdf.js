@@ -314,12 +314,37 @@ if (
     value: "canvas",
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   };
-  defaultOptions.sandboxBundleSrc = {
+  defaultOptions.hidePrintButton = {
+    /** @type {boolean} */
+    value: false,
+    kind: OptionKind.VIEWER,
+  };
+  defaultOptions.hideDownloadButton = {
+    /** @type {boolean} */
+    value: false,
+    kind: OptionKind.VIEWER,
+  };
+  defaultOptions.hideOpenFileButton = {
+    /** @type {boolean} */
+    value: false,
+    kind: OptionKind.VIEWER,
+  };
+  defaultOptions.hideEditorModeButtons = {
+    /** @type {boolean} */
+    value: false,
+    kind: OptionKind.VIEWER,
+  };
+  defaultOptions.csandboxBundleSrc = {
     /** @type {string} */
     value:
       typeof PDFJSDev === "undefined" || !PDFJSDev.test("PRODUCTION")
         ? "../build/dev-sandbox/pdf.sandbox.js"
         : "../build/pdf.sandbox.js",
+    kind: OptionKind.VIEWER,
+  };
+  defaultOptions.viewerContainerId = {
+    /** @type {string} */
+    value: "outerContainer",
     kind: OptionKind.VIEWER,
   };
 } else if (PDFJSDev.test("CHROME")) {

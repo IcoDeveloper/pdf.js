@@ -756,8 +756,8 @@ class ProgressBar {
     }, delay);
   }
 
-  hide() {
-    if (!this.#visible) {
+  hide(force) {
+    if (!this.#visible && !force) {
       return;
     }
     this.#visible = false;

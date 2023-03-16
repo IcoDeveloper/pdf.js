@@ -12,8 +12,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-
 import { CursorTool, ScrollMode, SpreadMode } from "./ui_utils.js";
+import { AppOptions } from "./app_options.js";
 import { PagesCountLimit } from "./pdf_viewer.js";
 
 /**
@@ -27,6 +27,8 @@ import { PagesCountLimit } from "./pdf_viewer.js";
  * @property {HTMLButtonElement} printButton - Button to print the document.
  * @property {HTMLButtonElement} downloadButton - Button to download the
  *   document.
+ * @property {HTMLButtonElement} undoButton - Button to undo the
+ *   last action.
  * @property {HTMLAnchorElement} viewBookmarkButton - Button to obtain a
  *   bookmark link to the current location in the document.
  * @property {HTMLButtonElement} firstPageButton - Button to go to the first
@@ -59,8 +61,7 @@ class SecondaryToolbar {
         eventName: "presentationmode",
         close: true,
       },
-      { element: options.printButton, eventName: "print", close: true },
-      { element: options.downloadButton, eventName: "download", close: true },
+
       { element: options.viewBookmarkButton, eventName: null, close: true },
       { element: options.firstPageButton, eventName: "firstpage", close: true },
       { element: options.lastPageButton, eventName: "lastpage", close: true },
@@ -134,13 +135,40 @@ class SecondaryToolbar {
         close: true,
       },
     ];
-    if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
+    if (
+      (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) &&
+      !AppOptions.get("hideOpenFileButton")
+    ) {
       this.buttons.push({
         element: options.openFileButton,
         eventName: "openfile",
         close: true,
       });
     }
+    if (!AppOptions.get("hidePrintButton")) {
+      this.buttons.push({
+        element: options.printButton,
+        eventName: "print",
+        close: true,
+      });
+    }
+
+    if (!AppOptions.get("hideDownloadButton")) {
+      this.buttons.push({
+        element: options.downloadButton,
+        eventName: "download",
+        close: true,
+      });
+    }
+
+    if (!AppOptions.get("hideEditorModeButtons")) {
+      this.buttons.push({
+        element: options.undoButton,
+        eventName: "undo",
+        close: true,
+      });
+    }
+
     this.items = {
       firstPage: options.firstPageButton,
       lastPage: options.lastPageButton,

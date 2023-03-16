@@ -83,7 +83,7 @@
   --toolbarButton-editorInk-icon: url(images/toolbarButton-editorInk.svg);
   --toolbarButton-menuArrow-icon: url(images/toolbarButton-menuArrow.svg);
   --toolbarButton-sidebarToggle-icon: url(images/toolbarButton-sidebarToggle.svg);
-  --toolbarButton-secondaryToolbarToggle-icon: url(images/toolbarButton-secondaryToolbarToggle.svg);
+  --toolbarButton-secondaryToolbarToggle-icon: url(images/gear.svg);
   --toolbarButton-pageUp-icon: url(images/toolbarButton-pageUp.svg);
   --toolbarButton-pageDown-icon: url(images/toolbarButton-pageDown.svg);
   --toolbarButton-zoomOut-icon: url(images/toolbarButton-zoomOut.svg);
@@ -94,6 +94,7 @@
   --toolbarButton-openFile-icon: url(images/toolbarButton-openFile.svg);
   /*#endif*/
   --toolbarButton-download-icon: url(images/toolbarButton-download.svg);
+  --toolbarButton-undo-icon: url(images/arrow-rotate-left.svg);
   --toolbarButton-bookmark-icon: url(images/toolbarButton-bookmark.svg);
   --toolbarButton-viewThumbnail-icon: url(images/toolbarButton-viewThumbnail.svg);
   --toolbarButton-viewOutline-icon: url(images/toolbarButton-viewOutline.svg);
@@ -127,10 +128,10 @@
   /*#endif*/
 }
 
-@media (prefers-color-scheme: dark) {
+/* @media (prefers-color-scheme: dark) { */
   :root {
     --main-color: rgba(249, 249, 250, 1);
-    --body-bg-color: rgba(42, 42, 46, 1);
+    --body-bg-color: rgb(70,70,70);
     --progressBar-color: rgba(0, 96, 223, 1);
     --progressBar-bg-color: rgba(40, 40, 43, 1);
     --progressBar-blend-color: rgba(20, 68, 133, 1);
@@ -170,7 +171,7 @@
      * here; hence why we still have two versions of this particular image. */
     --loading-icon: url(images/loading-dark.svg);
   }
-}
+/* } */
 
 @media screen and (forced-colors: active) {
   :root {
@@ -250,7 +251,7 @@ body {
   cursor: default;
 }
 
-#outerContainer {
+.pdfjs-container {
   width: 100%;
   height: 100%;
   position: relative;
@@ -272,11 +273,11 @@ body {
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
 
-#outerContainer.sidebarMoving .pdfjs-sidebarContainer,
-#outerContainer.sidebarOpen .pdfjs-sidebarContainer {
+.pdfjs-container.sidebarMoving .pdfjs-sidebarContainer,
+.pdfjs-container.sidebarOpen .pdfjs-sidebarContainer {
   visibility: visible;
 }
-#outerContainer.sidebarOpen .pdfjs-sidebarContainer {
+.pdfjs-container.sidebarOpen .pdfjs-sidebarContainer {
   inset-inline-start: 0;
 }
 
@@ -313,7 +314,7 @@ body {
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
 
-#outerContainer.sidebarOpen .pdfjs-viewerContainer:not(.pdfPresentationMode) {
+.pdfjs-container.sidebarOpen .pdfjs-viewerContainer:not(.pdfPresentationMode) {
   inset-inline-start: var(--sidebar-width);
   transition-property: inset-inline-start;
 }
@@ -400,7 +401,7 @@ body {
   transition-timing-function: var(--sidebar-transition-timing-function);
 }
 
-#outerContainer.sidebarOpen .pdfjs-loadingBar {
+.pdfjs-container.sidebarOpen .pdfjs-loadingBar {
   inset-inline-start: var(--sidebar-width);
 }
 
@@ -450,9 +451,9 @@ body {
   animation: progressIndeterminate 1s linear infinite;
 }
 
-#outerContainer.sidebarResizing .pdfjs-sidebarContainer,
-#outerContainer.sidebarResizing .pdfjs-viewerContainer,
-#outerContainer.sidebarResizing .pdfjs-loadingBar {
+.pdfjs-container.sidebarResizing .pdfjs-sidebarContainer,
+.pdfjs-container.sidebarResizing .pdfjs-viewerContainer,
+.pdfjs-container.sidebarResizing .pdfjs-loadingBar {
   /* Improve responsiveness and avoid visual glitches when the sidebar is resized. */
   transition-duration: 0s;
 }
@@ -534,9 +535,10 @@ body {
 .secondaryToolbar,
 .editorParamsToolbar {
   padding: 6px 0 10px;
-  inset-inline-end: 4px;
+  inset-inline-end: 99px;
   height: auto;
   background-color: var(--doorhanger-bg-color);
+
 }
 
 .editorParamsToolbarContainer {
@@ -973,6 +975,12 @@ body {
   mask-image: var(--toolbarButton-download-icon);
 }
 
+.pdfjs-undo::before,
+.pdfjs-secondaryUndo::before {
+  -webkit-mask-image: var(--toolbarButton-undo-icon);
+  mask-image: var(--toolbarButton-undo-icon);
+}
+
 a.secondaryToolbarButton {
   padding-top: 5px;
   text-decoration: none;
@@ -1082,7 +1090,7 @@ a.secondaryToolbarButton[href="#"] {
   mask-image: var(--secondaryToolbarButton-handTool-icon);
 }
 
-#scrollPage::before {
+.pdfjs-scrollPage::before {
   -webkit-mask-image: var(--secondaryToolbarButton-scrollPage-icon);
   mask-image: var(--secondaryToolbarButton-scrollPage-icon);
 }
@@ -1102,17 +1110,17 @@ a.secondaryToolbarButton[href="#"] {
   mask-image: var(--secondaryToolbarButton-scrollWrapped-icon);
 }
 
-#spreadNone::before {
+.pdfjs-spreadNone::before {
   -webkit-mask-image: var(--secondaryToolbarButton-spreadNone-icon);
   mask-image: var(--secondaryToolbarButton-spreadNone-icon);
 }
 
-#spreadOdd::before {
+.pdfjs-spreadOdd::before {
   -webkit-mask-image: var(--secondaryToolbarButton-spreadNone-icon);
   mask-image: var(--secondaryToolbarButton-spreadNone-icon);
 }
 
-#spreadEven::before {
+.pdfjs-spreadEven::before {
   -webkit-mask-image: var(--secondaryToolbarButton-spreadEven-icon);
   mask-image: var(--secondaryToolbarButton-spreadEven-icon);
 }
@@ -1462,7 +1470,7 @@ dialog :link {
   body {
     background: rgba(0, 0, 0, 0) none;
   }
-  body[data-pdfjsprinting] #outerContainer {
+  body[data-pdfjsprinting] .pdfjs-container {
     display: none;
   }
   body[data-pdfjsprinting] .pdfjs-printContainer {
@@ -1528,26 +1536,35 @@ dialog :link {
   .pdfjs-sidebarContainer {
     background-color: var(--sidebar-narrow-bg-color);
   }
-  #outerContainer.sidebarOpen .pdfjs-viewerContainer {
+  .pdfjs-container.sidebarOpen .pdfjs-viewerContainer {
     inset-inline-start: 0 !important;
   }
 }
 
 @media all and (max-width: 820px) {
-  #outerContainer .hiddenLargeView {
+  .pdfjs-container .hiddenLargeView {
     display: none;
   }
-  #outerContainer .visibleLargeView {
+  .pdfjs-container .visibleLargeView {
     display: inherit;
+  }
+  .secondaryToolbar,
+  .editorParamsToolbar {
+    inset-inline-end: 70px;    
   }
 }
 
 @media all and (max-width: 750px) {
-  #outerContainer .hiddenMediumView {
+  .pdfjs-container .hiddenMediumView {
     display: none;
   }
-  #outerContainer .visibleMediumView {
+  .pdfjs-container .visibleMediumView {
     display: inherit;
+  }
+
+  .secondaryToolbar,
+  .editorParamsToolbar {
+    inset-inline-end: 4px;    
   }
 }
 
