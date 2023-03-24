@@ -239,6 +239,7 @@ const PDFViewerApplication = {
     this.preferences = this.externalServices.createPreferences();
     this.appConfig = appConfig;
 
+    AppOptions.set("disablePreferences", true);
     await this._initializeOptions();
     this._forceCssTheme();
     await this._initializeL10n();
@@ -2215,7 +2216,6 @@ function webViewerInitialized() {
   } else if (PDFJSDev.test("CHROME")) {
     file = AppOptions.get("defaultUrl");
   }
-
   if (typeof PDFJSDev === "undefined" || PDFJSDev.test("GENERIC")) {
     const fileInput = appConfig.openFileInput;
     fileInput.value = null;
