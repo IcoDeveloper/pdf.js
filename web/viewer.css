@@ -1233,7 +1233,7 @@ input.pdfjs-pageNumber::-webkit-inner-spin-button {
   outline: 0;
 }
 
-.thumbnail {
+.pdfjs-container .thumbnail {
   float: var(--inline-start);
   margin: 0 10px 5px;
 }
@@ -1245,12 +1245,12 @@ input.pdfjs-pageNumber::-webkit-inner-spin-button {
   margin-bottom: 9px;
 }
 
-.thumbnail:not([data-loaded]) {
+.pdfjs-container .thumbnail:not([data-loaded]) {
   border: 1px dashed rgba(132, 132, 132, 1);
   margin: -1px 9px 4px;
 }
 
-.thumbnailImage {
+.pdfjs-container .thumbnailImage {
   border: 1px solid rgba(0, 0, 0, 0);
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.5), 0 2px 8px rgba(0, 0, 0, 0.3);
   opacity: 0.8;
@@ -1264,34 +1264,34 @@ input.pdfjs-pageNumber::-webkit-inner-spin-button {
   padding: 7px;
 }
 
-a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage,
-.thumbnail:hover > .thumbnailSelectionRing > .thumbnailImage {
+.pdfjs-container a:focus > .thumbnail > .thumbnailSelectionRing > .thumbnailImage,
+.pdfjs-container .thumbnail:hover > .thumbnailSelectionRing > .thumbnailImage {
   opacity: 0.9;
 }
 
-a:focus > .thumbnail > .thumbnailSelectionRing,
-.thumbnail:hover > .thumbnailSelectionRing {
+.pdfjs-container a:focus > .thumbnail > .thumbnailSelectionRing,
+.pdfjs-container .thumbnail:hover > .thumbnailSelectionRing {
   background-color: var(--sidebaritem-bg-color);
   background-clip: padding-box;
   color: rgba(255, 255, 255, 0.9);
 }
 
-.thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
+.pdfjs-container .thumbnail.selected > .thumbnailSelectionRing > .thumbnailImage {
   opacity: 1;
 }
 
-.thumbnail.selected > .thumbnailSelectionRing {
+.pdfjs-container .thumbnail.selected > .thumbnailSelectionRing {
   background-color: var(--sidebaritem-bg-color);
   background-clip: padding-box;
   color: rgba(255, 255, 255, 1);
 }
 
-.treeWithDeepNesting > .treeItem,
-.treeItem > .treeItems {
+.pdfjs-container .treeWithDeepNesting > .treeItem,
+.pdfjs-container .treeItem > .treeItems {
   margin-inline-start: 20px;
 }
 
-.treeItem > a {
+.pdfjs-container .treeItem > a {
   text-decoration: none;
   display: inline-block;
   /* Subtract the right padding (left, in RTL mode) of the container: */
@@ -1320,43 +1320,43 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
   margin-top: 1px;
 }
 
-.treeItemToggler {
+.pdfjs-container .treeItemToggler {
   position: relative;
   float: var(--inline-start);
   height: 0;
   width: 0;
   color: rgba(255, 255, 255, 0.5);
 }
-.treeItemToggler::before {
+.pdfjs-container .treeItemToggler::before {
   inset-inline-end: 4px;
   -webkit-mask-image: var(--treeitem-expanded-icon);
   mask-image: var(--treeitem-expanded-icon);
 }
-.treeItemToggler.treeItemsHidden::before {
+.pdfjs-container .treeItemToggler.treeItemsHidden::before {
   -webkit-mask-image: var(--treeitem-collapsed-icon);
   mask-image: var(--treeitem-collapsed-icon);
   transform: scaleX(var(--dir-factor));
 }
-.treeItemToggler.treeItemsHidden ~ .treeItems {
+.pdfjs-container .treeItemToggler.treeItemsHidden ~ .treeItems {
   display: none;
 }
 
-.treeItem.selected > a {
+.pdfjs-container .treeItem.selected > a {
   background-color: var(--treeitem-selected-bg-color);
   color: var(--treeitem-selected-color);
 }
 
-.treeItemToggler:hover,
-.treeItemToggler:hover + a,
-.treeItemToggler:hover ~ .treeItems,
-.treeItem > a:hover {
+.pdfjs-container .treeItemToggler:hover,
+.pdfjs-container .treeItemToggler:hover + a,
+.pdfjs-container .treeItemToggler:hover ~ .treeItems,
+.pdfjs-container .treeItem > a:hover {
   background-color: var(--sidebaritem-bg-color);
   background-clip: padding-box;
   border-radius: 2px;
   color: var(--treeitem-hover-color);
 }
 
-.dialogButton {
+.pdfjs-container .dialogButton {
   width: auto;
   margin: 3px 4px 2px !important;
   padding: 2px 11px;
@@ -1365,7 +1365,7 @@ a:focus > .thumbnail > .thumbnailSelectionRing,
   border: var(--dialog-button-border) !important;
 }
 
-dialog {
+.pdfjs-container dialog {
   margin: auto;
   padding: 15px;
   border-spacing: 4px;
@@ -1378,23 +1378,23 @@ dialog {
   border-radius: 4px;
   box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
 }
-dialog::backdrop {
+.pdfjs-container dialog::backdrop {
   background-color: rgba(0, 0, 0, 0.2);
 }
 
-dialog > .row {
+.pdfjs-container dialog > .row {
   display: table-row;
 }
 
-dialog > .row > * {
+.pdfjs-container dialog > .row > * {
   display: table-cell;
 }
 
-dialog .toolbarField {
+.pdfjs-container dialog .toolbarField {
   margin: 5px 0;
 }
 
-dialog .separator {
+.pdfjs-container dialog .separator {
   display: block;
   margin: 4px 0;
   height: 1px;
@@ -1402,12 +1402,12 @@ dialog .separator {
   background-color: var(--separator-color);
 }
 
-dialog .buttonRow {
+.pdfjs-container dialog .buttonRow {
   text-align: center;
   vertical-align: middle;
 }
 
-dialog :link {
+.pdfjs-container dialog :link {
   color: rgba(255, 255, 255, 1);
 }
 
@@ -1467,7 +1467,7 @@ dialog :link {
 }
 
 @media print {
-  body {
+  body.pdfjs-webviewer-example {
     background: rgba(0, 0, 0, 0) none;
   }
   body[data-pdfjsprinting] .pdfjs-container {
@@ -1517,8 +1517,8 @@ dialog :link {
   }
 }
 
-.visibleLargeView,
-.visibleMediumView {
+.pdfjs-container .visibleLargeView,
+.pdfjs-container .visibleMediumView {
   display: none;
 }
 
@@ -1562,27 +1562,27 @@ dialog :link {
     display: inherit;
   }
 
-  .secondaryToolbar,
-  .editorParamsToolbar {
+  .pdfjs-container .secondaryToolbar,
+  .pdfjs-container .editorParamsToolbar {
     inset-inline-end: 4px;    
   }
 }
 
 @media all and (max-width: 690px) {
-  .hiddenSmallView,
-  .hiddenSmallView * {
+  .pdfjs-container .hiddenSmallView,
+  .pdfjs-container .hiddenSmallView * {
     display: none;
   }
-  .toolbarButtonSpacer {
+  .pdfjs-container .toolbarButtonSpacer {
     width: 0;
   }
-  .findbar {
+  .pdfjs-container .findbar {
     inset-inline-start: 34px;
   }
 }
 
 @media all and (max-width: 560px) {
-  #scaleSelectContainer {
+  .pdfjs-scaleSelectContainer {
     display: none;
   }
 }
