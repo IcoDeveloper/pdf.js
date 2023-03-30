@@ -73,6 +73,8 @@ class InkEditor extends AnnotationEditor {
 
   static _type = "ink";
 
+  static _defaultSmoothing = 30;
+
   constructor(params) {
     super({ ...params, name: "inkEditor" });
     this.color = params.color || null;
@@ -440,7 +442,7 @@ class InkEditor extends AnnotationEditor {
     // to reduce the data size used to draw it in the PDF.
     let bezier;
     if (this.currentPath.length !== 1) {
-      bezier = fitCurve(this.currentPath, 30, null);
+      bezier = fitCurve(this.currentPath, InkEditor._defaultSmoothing, null);
     } else {
       // We have only one point finally.
       const xy = [x, y];

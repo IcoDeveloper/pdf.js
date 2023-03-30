@@ -113,6 +113,16 @@ const defaultOptions = {
     value: 0,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
+  freeTextColor:{
+    /** @type {string} */
+    value: '#000000',
+    kind: OptionKind.VIEWER,
+  },
+  freeTextFontSize: {
+    /** @type {number} */
+    value: 10,
+    kind: OptionKind.VIEWER,
+  },
   historyUpdateUrl: {
     /** @type {boolean} */
     value: false,
@@ -122,6 +132,26 @@ const defaultOptions = {
     /** @type {boolean} */
     value: false,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
+  },
+  inkEditorColor: {
+    /** @type {string} */
+    value: '#000000',
+    kind: OptionKind.VIEWER,
+  },
+  inkEditorThickness: {
+    /** @type {number} */
+    value: 5,
+    kind: OptionKind.VIEWER,
+  },
+  inkEditorOpacity: {
+    /** @type {number} */
+    value: 0.5,
+    kind: OptionKind.VIEWER,
+  },
+  inkEditorSmoothing: {
+    /** @type {number} */
+    value: 30,
+    kind: OptionKind.VIEWER,
   },
   imageResourcesPath: {
     /** @type {string} */
@@ -193,7 +223,6 @@ const defaultOptions = {
     value: 0,
     kind: OptionKind.VIEWER + OptionKind.PREFERENCE,
   },
-
   cMapPacked: {
     /** @type {boolean} */
     value: true,
@@ -275,7 +304,6 @@ const defaultOptions = {
     value: 1,
     kind: OptionKind.API,
   },
-
   workerPort: {
     /** @type {Object} */
     value: null,
@@ -289,6 +317,7 @@ const defaultOptions = {
         : "../build/pdf.worker.js",
     kind: OptionKind.WORKER,
   },
+
 };
 if (
   typeof PDFJSDev === "undefined" ||

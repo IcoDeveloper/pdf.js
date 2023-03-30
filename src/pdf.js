@@ -71,6 +71,8 @@ import { AnnotationLayer } from "./display/annotation_layer.js";
 import { GlobalWorkerOptions } from "./display/worker_options.js";
 import { SVGGraphics } from "./display/svg.js";
 import { XfaLayer } from "./display/xfa_layer.js";
+import {InkEditor} from "./display/editor/ink.js"
+import { FreeTextEditor } from "./display/editor/freetext.js";
 
 /* eslint-disable-next-line no-unused-vars */
 const pdfjsVersion =
@@ -93,11 +95,13 @@ export {
   createValidAbsoluteUrl,
   FeatureTest,
   FilterFactory,
+  FreeTextEditor,
   getDocument,
   getFilenameFromUrl,
   getPdfFilenameFromUrl,
   getXfaPageViewport,
   GlobalWorkerOptions,
+  InkEditor,
   InvalidPDFException,
   isDataScheme,
   isPdfFile,

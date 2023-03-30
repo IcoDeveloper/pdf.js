@@ -39,11 +39,13 @@ import {
   build,
   createPromiseCapability,
   FeatureTest,
+  FreeTextEditor,
   getDocument,
   getFilenameFromUrl,
   getPdfFilenameFromUrl,
   GlobalWorkerOptions,
   InvalidPDFException,
+  InkEditor,
   isDataScheme,
   isPdfFile,
   loadScript,
@@ -252,6 +254,15 @@ const PDFViewerApplication = {
       // when it's embedded in e.g. an <iframe> or an <object>.
       AppOptions.set("externalLinkTarget", LinkTarget.TOP);
     }
+
+    InkEditor._defaultColor = AppOptions.get('inkEditorColor');
+    InkEditor._defaultOpacity = AppOptions.get('inkEditorOpacity');
+    InkEditor._defaultThickness = AppOptions.get('inkEditorThickness');
+    InkEditor._defaultSmoothing = AppOptions.get('inkEditorSmoothing');
+
+    FreeTextEditor._defaultColor =  AppOptions.get('freeTextColor');
+    FreeTextEditor._defaultFontSize =  AppOptions.get('freeTextFontSize');
+
     await this._initializeViewerComponents();
 
     // Bind the various event handlers *after* the viewer has been
@@ -266,7 +277,7 @@ const PDFViewerApplication = {
       // has been fully initialized and translated.
       this.eventBus.dispatch("localized", { source: this });
     });
-
+    
     this._initializedCapability.resolve();
   },
 
@@ -281,6 +292,7 @@ const PDFViewerApplication = {
         }
         // Give custom implementations of the default viewer a simpler way to
         // opt-out of having the `Preferences` override existing `AppOptions`.
+        
         return;
       }
       if (AppOptions._hasUserOptions()) {
