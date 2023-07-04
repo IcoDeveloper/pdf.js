@@ -137,11 +137,11 @@ function safeSpawnSync(command, parameters, options) {
   if (result.status !== 0) {
     console.log(
       'Error: command "' +
-        command +
-        '" with parameters "' +
-        parameters +
-        '" exited with code ' +
-        result.status
+      command +
+      '" with parameters "' +
+      parameters +
+      '" exited with code ' +
+      result.status
     );
     process.exit(result.status);
   }
@@ -164,7 +164,7 @@ function createStringSource(filename, content) {
     this.push(
       new Vinyl({
         path: filename,
-        contents: Buffer.from(content),
+        contents: Buffer.from(content)
       })
     );
     this.push(null);
@@ -356,7 +356,7 @@ function checkChromePreferencesFile(chromePrefsPath, webPrefs) {
       ret = false;
       console.log(
         `Warning: not the same values (for "${value}"): ` +
-          `${chromePrefs.properties[value].default} !== ${webPrefs[value]}`
+        `${chromePrefs.properties[value].default} !== ${webPrefs[value]}`
       );
     }
   }
@@ -858,18 +858,21 @@ gulp.task("locale", function () {
         "]\n" +
         "@import url(" +
         locale +
-        "/viewer.properties)\n\n";
+        "/viewer.properties.txt)\n\n";
     }
   }
 
   return merge([
-    createStringSource("locale.properties", viewerOutput).pipe(
+    createStringSource("locale.properties.txt", viewerOutput).pipe(
       gulp.dest(VIEWER_LOCALE_OUTPUT)
     ),
     gulp
       .src(L10N_DIR + "/{" + locales.join(",") + "}/viewer.properties", {
         base: L10N_DIR,
       })
+      .pipe(rename(function (path) {
+        path.extname = ".properties.txt";
+      }))
       .pipe(gulp.dest(VIEWER_LOCALE_OUTPUT)),
   ]);
 });
@@ -940,7 +943,7 @@ function buildGeneric(defines, dir) {
     gulp.src(COMMON_WEB_FILES, { base: "web/" }).pipe(gulp.dest(dir + "web")),
     gulp.src("LICENSE").pipe(gulp.dest(dir)),
     gulp
-      .src(["web/locale/*/viewer.properties", "web/locale/locale.properties"], {
+      .src(["web/locale/*/viewer.properties.txt", "web/locale/locale.properties.txt"], {
         base: "web/",
       })
       .pipe(gulp.dest(dir + "web")),
@@ -2478,8 +2481,8 @@ gulp.task(
             .on("end", function () {
               console.log(
                 "Result diff can be found at " +
-                  BUILD_DIR +
-                  MOZCENTRAL_DIFF_FILE
+                BUILD_DIR +
+                MOZCENTRAL_DIFF_FILE
               );
               done();
             });
