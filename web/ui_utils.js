@@ -119,6 +119,11 @@ class OutputScale {
  *   or have the CSS-rule `overflow: hidden;` set. The default value is `false`.
  */
 function scrollIntoView(element, spot, scrollMatches = false) {
+  if (PDFViewerApplication.IS_HF_ENV && PDFViewerApplication.pdfViewer.pagesCount < 2) {
+    // scrolling is not necessary in HF Environment when only one site is present
+    return;
+  }
+
   // Assuming offsetParent is available (it's not available when viewer is in
   // hidden iframe or object). We have to scroll: if the offsetParent is not set
   // producing the error. See also animationStarted.
