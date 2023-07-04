@@ -293,6 +293,7 @@ function webViewerLoad(ev, hfReference) {
     // is call from HybridForms
     PDFViewerApplication.hfReference = hfReference;
     PDFViewerApplication.loadingBar.hide(true);
+
   }
 
   return PDFViewerApplication.run(config);
@@ -303,7 +304,10 @@ function webViewerLoad(ev, hfReference) {
 document.blockUnblockOnload?.(true);
 
 if (!window.WinJS) {
+  PDFViewerApplication.IS_HF_ENV = false;
   document.addEventListener("DOMContentLoaded", webViewerLoad, true);
+} else {
+  PDFViewerApplication.IS_HF_ENV = true;
 }
 
 export {

@@ -2083,6 +2083,26 @@ class PDFViewer {
   }
 
   #updateContainerHeightCss(height = this.container.clientHeight) {
+    if (height === 0) {
+      // try to get height again for some time
+      let count = 0;
+      const heightInterval = window.setInterval(() => {
+        if (this.container.clientHeight) {
+          if (height !== this.#previousContainerHeight) {
+            this.#previousContainerHeight = height;
+            docStyle.setProperty("--viewer-container-height", `${height}px`);
+          }
+          
+          heightInterval = null;
+          window.clearInterval(heightInterval);
+        }
+        if (count > 10) {
+          window.clearInterval(heightInterval);
+        }
+      }, 100)
+      return;
+    } 
+
     if (height !== this.#previousContainerHeight) {
       this.#previousContainerHeight = height;
       docStyle.setProperty("--viewer-container-height", `${height}px`);

@@ -207,7 +207,7 @@
   }
 }
 
-* {
+.pdfjs-webviewer-example * {
   padding: 0;
   margin: 0;
 }
